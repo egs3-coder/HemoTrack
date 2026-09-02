@@ -6,7 +6,7 @@
 
 ## 📖 Sobre o Projeto
 
-O **HemoTrack** é uma solução desenvolvida para otimizar o fluxo de suprimento de sangue entre hospitais e hemocentros, mitigando riscos de desabastecimento, reduzindo o descarte de bolsas por vencimento e solucionando gargalos na logística hospitalar.
+O **HemoTrack** é uma solução desenvolvida para otimizar o fluxo de suprimento de sangue entre hospitais e hemocentros, mitigando riscos de desabastecimento, reduzindo o descarte de bolsas por vencimento e solucionando gargalos e problemas na logística hospitalar.
 
 A plataforma integra:
 * **Gestão de Estoque e Compatibilidade:** Validação de compatibilidade sanguínea ABO/Rh e priorização inteligente via método **FEFO** (*First Expire, First Out*).
