@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="./assets/logo-hemotrack.png" alt="Logo HemoTrack" width="850">
+<img src="./assets/HemoTrack.png" alt="Logo HemoTrack" width="850">
 
 # 🩸 HemoTrack
 
@@ -38,7 +38,7 @@ O sistema busca integrar, em um único fluxo:
 <table align="center">
   <tr>
     <td align="center" width="220">
-      <img src="./assets/integrantes/integrante-01.jpg" width="120" height="120"><br>
+      <img src="./assets/integrantes/Ewerton.jpgeg" width="120" height="120"><br>
       <b>Ewerton Guilherme da Silva</b><br>
       <sub>Product Owner</sub>
     </td>
