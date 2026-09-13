@@ -43,34 +43,34 @@ O sistema busca integrar, em um único fluxo:
       <sub>Product Owner</sub>
     </td>
     <td align="center" width="220">
-      <img src="./assets/integrantes/integrante-02.jpg" width="120" height="120"><br>
+      <img src="./assets/Pablo.jpeg" width="120" height="120"><br>
       <b>Pablo Arthur Eustáquio de Lima</b><br>
       <sub>Backend Developer</sub>
     </td>
     <td align="center" width="220">
-      <img src="./assets/integrantes/integrante-03.jpg" width="120" height="120"><br>
+      <img src="./assets/Joao.jpeg" width="120" height="120"><br>
       <b>João Ricardo Alves de Brito</b><br>
       <sub>Backend Developer</sub>
     </td>
     <td align="center" width="220">
-      <img src="./assets/integrantes/integrante-04.jpg" width="120" height="120"><br>
+      <img src="./assets/Lucas.jpeg" width="120" height="120"><br>
       <b>Lucas Aprigio dos Santos</b><br>
       <sub>Backend Developer</sub>
     </td>
   </tr>
   <tr>
     <td align="center">
-      <img src="./assets/integrantes/integrante-05.jpg" width="120" height="120"><br>
+      <img src="./assets/Saulo.jpeg" width="120" height="120"><br>
       <b>Saulo Eduardo Almeida dos Santos</b><br>
       <sub>Backend Developer</sub>
     </td>
     <td align="center">
-      <img src="./assets/integrantes/integrante-06.jpg" width="120" height="120"><br>
+      <img src="./assets/Thiago.jpeg" width="120" height="120"><br>
       <b>Thiago Cardozo da Conceição</b><br>
       <sub>Frontend / UI Designer</sub>
     </td>
     <td align="center">
-      <img src="./assets/integrantes/integrante-07.jpg" width="120" height="120"><br>
+      <img src="./assets/Eloi.jpeg" width="120" height="120"><br>
       <b>Eloi de Lima Sousa</b><br>
       <sub>Frontend / UI Designer</sub>
     </td>
@@ -129,7 +129,7 @@ organizada, garantindo:
 ## 📊 Fluxo principal do sistema
 
 <div align="center">
-  <img src="./assets/diagramas/fluxo-completo.png" alt="Fluxo completo do sistema" width="520">
+  <img src="./assets/fluxo.png" alt="Fluxo completo do sistema" width="520">
 </div>
 
 ---
@@ -137,7 +137,7 @@ organizada, garantindo:
 ## 🧠 Compatibilidade + FEFO
 
 <div align="center">
-  <img src="./assets/diagramas/compatibilidade-fefo.png" alt="Compatibilidade e FEFO" width="780">
+  <img src="./assets/fefo.png" alt="Compatibilidade e FEFO" width="780">
 </div>
 
 ### Regra de alocação
@@ -157,7 +157,7 @@ o sistema deverá:
 ## 🗺️ Distribuição
 
 <div align="center">
-  <img src="./assets/diagramas/distribuicao.png" alt="Distribuição para hospitais" width="780">
+  <img src="./assets/distribuicao.png" alt="Distribuição para hospitais" width="780">
 </div>
 
 O **HemoTrack** também considera a etapa de distribuição, permitindo
@@ -168,7 +168,7 @@ organizar o envio de hemocomponentes do hemocentro para os hospitais.
 ## 🌡️ Telemetria
 
 <div align="center">
-  <img src="./assets/diagramas/telemetria.png" alt="Fluxo de telemetria" width="900">
+  <img src="./assets/telemetria.png" alt="Fluxo de telemetria" width="900">
 </div>
 
 A telemetria permite acompanhar informações como:
@@ -185,7 +185,7 @@ A telemetria permite acompanhar informações como:
 ## 🏗️ Arquitetura geral
 
 <div align="center">
-  <img src="./assets/diagramas/arquitetura-geral.png" alt="Arquitetura geral do sistema" width="820">
+  <img src="./assets/arquitetura.png" alt="Arquitetura geral do sistema" width="820">
 </div>
 
 ---
@@ -224,7 +224,7 @@ A telemetria permite acompanhar informações como:
 ## 📅 Roadmap
 
 <div align="center">
-  <img src="./assets/diagramas/roadmap.png" alt="Roadmap HemoTrack" width="1000">
+  <img src="./assets/roadmap.png" alt="Roadmap HemoTrack" width="1000">
 </div>
 
 ---
