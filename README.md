@@ -258,6 +258,18 @@ O **HemoTrack** será considerado funcional quando for possível demonstrar:
 
 ---
 
+## 📌 Entregas do Projeto
+
+### 🚀 Entrega 01 (31/08)
+
+Esta primeira entrega consolida a especificação dos requisitos do sistema através de histórias de usuário no padrão BDD e a prototipação navegável de baixa fidelidade (Lo-Fi) das jornadas principais.
+
+* *Histórias de Usuário (.MD):* [Acessar Documento de Histórias de Usuário](https://github.com/egs3-coder/HemoTrack/blob/main/docs/user.stories.md)
+* *Protótipo Lo-Fi no Figma:* [Visualizar Wireframes no Figma](https://www.figma.com/make/eQxxCgBKHDBxbp5wNhSMW7/Lo-fi-prototype-for-HemoTrack--c%C3%B3pia-?t=GAG7zv0kbjXYIOBL-20&fullscreen=1)
+* *Screencast de Apresentação (YouTube):* [Assistir Demonstração no YouTube](https://youtu.be/yJoMx3rl060?si=1mUqssVJ3JXFFymr)
+
+---
+
 <div align="center">
 
 ## 🩸 HemoTrack
