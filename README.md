@@ -27,9 +27,9 @@ Esta primeira entrega consolida a especificação dos requisitos do sistema atra
 
 ### 🚀 Entrega 02 (21/09)
 
-Esta primeira entrega consolida a especificação dos requisitos do sistema através de histórias de usuário no padrão BDD e a prototipação navegável de baixa fidelidade (Lo-Fi) das jornadas principais.
+Esta segunda entrega apresenta a implementação do cadastro de bolsas de sangue e da alocação automática por compatibilidade ABO/Rh e regra FEFO.
 
-* *Histórias de Usuário (.MD):* [Acessar Documento de Histórias de Usuário](https://github.com/egs3-coder/HemoTrack/blob/main/docs/user.stories.md)
+* *Histórias de Usuário (.MD):* [Acessar Documento de Histórias de Usuário](https://github.com/egs3-coder/HemoTrack/blob/main/docs/entrega_02)
 * *Screencast de Apresentação Visual (YouTube):* [Assistir Demonstração no YouTube](https://youtu.be/yJoMx3rl060?si=1mUqssVJ3JXFFymr)
 * * *Screencast de Apresentação Código (YouTube):* [Assistir Demonstração no YouTube](https://youtu.be/yJoMx3rl060?si=1mUqssVJ3JXFFymr)
 
