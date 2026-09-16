@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HemoTrack</title>
+    <link rel="stylesheet" th:href="@{/css/estilo.css}">
+</head>
+<body>
+<main class="pagina pagina-inicio">
+    <section class="cabecalho-inicio">
+        <div class="marca-grande">
+            <span class="simbolo-marca">◢</span>
+            <span class="nome-marca">Hemo<span>Track</span></span>
+        </div>
+
+        <p class="subtitulo-inicio">Entrega 02 - Estoque e Alocação FEFO</p>
+    </section>
+
+    <section class="grade-menu">
+        <a class="cartao-menu" th:href="@{/bolsas}">
+            <div class="icone-menu">🩸</div>
+            <div class="texto-menu">Estoque de Bolsas</div>
+        </a>
+
+        <a class="cartao-menu" th:href="@{/requisicoes}">
+            <div class="icone-menu">✚</div>
+            <div class="texto-menu">Requisições</div>
+        </a>
+    </section>
+
+    <footer class="rodape-inicio">
+        <div class="marca-rodape">
+            <span class="simbolo-marca pequeno">◢</span>
+            <span>HemoTrack</span>
+        </div>
+
+        <span>HemoTrack System v3.1.1 - Operacional</span>
+
+        <div class="indicadores">
+            <span class="indicador verde"></span>
+            <span class="indicador azul"></span>
+            <span class="indicador cinza"></span>
+        </div>
+    </footer>
+</main>
+</body>
+</html>

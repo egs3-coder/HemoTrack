@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Nova Bolsa - HemoTrack</title>
+    <link rel="stylesheet" th:href="@{/css/estilo.css}">
+</head>
+<body>
+<main class="pagina-centralizada">
+    <section class="painel painel-formulario">
+        <h1 class="titulo-formulario">Nova Bolsa</h1>
+
+        <div class="mensagem erro" th:if="${erro}" th:text="${erro}"></div>
+
+        <form th:action="@{/bolsas}" th:object="${bolsa}" method="post">
+            <div class="grupo-campo">
+                <label>Código</label>
+                <input type="text" th:field="*{codigo}" required>
+                <small class="ajuda-campo">
+                    Use um código-base. Em lotes, serão acrescentados -001, -002 e assim por diante.
+                </small>
+            </div>
+
+            <div class="grupo-campo">
+                <label>Quantidade de bolsas</label>
+                <input type="number" min="1" th:field="*{quantidadeCadastro}" required>
+            </div>
+
+            <div class="grupo-campo">
+                <label>Hemocomponente</label>
+                <select th:field="*{hemocomponente}" required>
+                    <option value="">Selecione</option>
+                    <option th:each="item : ${hemocomponentes}"
+                            th:value="${item}"
+                            th:text="${item.descricao}">
+                    </option>
+                </select>
+            </div>
+
+            <div class="grupo-campo">
+                <label>Tipo sanguíneo</label>
+                <select th:field="*{tipoSanguineo}" required>
+                    <option value="">Selecione</option>
+                    <option th:each="tipo : ${tiposSanguineos}"
+                            th:value="${tipo}"
+                            th:text="${tipo.descricao}">
+                    </option>
+                </select>
+            </div>
+
+            <div class="grupo-campo">
+                <label>Data de coleta</label>
+                <input type="date" th:field="*{dataColeta}" required>
+            </div>
+
+            <div class="grupo-campo">
+                <label>Data de validade</label>
+                <input type="date" th:field="*{dataValidade}" required>
+            </div>
+
+            <button class="botao botao-brilhante" type="submit">Salvar</button>
+        </form>
+
+        <a class="link-voltar" th:href="@{/bolsas}">Voltar</a>
+    </section>
+
+    <div class="marca-canto">
+        <span class="simbolo-marca pequeno">◢</span>
+        <span>HemoTrack</span>
+    </div>
+</main>
+</body>
+</html>

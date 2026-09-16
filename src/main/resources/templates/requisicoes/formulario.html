@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Nova Requisição - HemoTrack</title>
+    <link rel="stylesheet" th:href="@{/css/estilo.css}">
+</head>
+<body>
+<main class="pagina-centralizada">
+    <section class="painel painel-formulario">
+        <h1 class="titulo-formulario centralizado">Nova Requisição</h1>
+
+        <div class="mensagem erro" th:if="${erro}" th:text="${erro}"></div>
+
+        <form th:action="@{/requisicoes}" th:object="${requisicao}" method="post">
+            <div class="grupo-campo">
+                <label>Hospital</label>
+                <select th:field="*{hospital}" required>
+                    <option value="">Selecione</option>
+                    <option th:each="hospital : ${hospitais}"
+                            th:value="${hospital.id}"
+                            th:text="${hospital.nome + ' - ' + hospital.cidade}">
+                    </option>
+                </select>
+            </div>
+
+            <div class="grupo-campo">
+                <label>Hemocomponente</label>
+                <select th:field="*{hemocomponente}" required>
+                    <option value="">Selecione</option>
+                    <option th:each="item : ${hemocomponentes}"
+                            th:value="${item}"
+                            th:text="${item.descricao}">
+                    </option>
+                </select>
+            </div>
+
+            <div class="grupo-campo">
+                <label>Tipo sanguíneo do paciente</label>
+                <select th:field="*{tipoSanguineoPaciente}" required>
+                    <option value="">Selecione</option>
+                    <option th:each="tipo : ${tiposSanguineos}"
+                            th:value="${tipo}"
+                            th:text="${tipo.descricao}">
+                    </option>
+                </select>
+            </div>
+
+            <div class="grupo-campo">
+                <label>Quantidade</label>
+                <input type="number" min="1" th:field="*{quantidade}" required>
+            </div>
+
+            <div class="grupo-campo">
+                <label>Urgência</label>
+                <select th:field="*{urgencia}" required>
+                    <option value="">Selecione</option>
+                    <option value="NORMAL">Normal</option>
+                    <option value="URGENTE">Urgente</option>
+                    <option value="EMERGENCIA">Emergência</option>
+                </select>
+            </div>
+
+            <button class="botao botao-brilhante" type="submit">Salvar</button>
+        </form>
+
+        <a class="link-voltar" th:href="@{/requisicoes}">Voltar</a>
+    </section>
+
+    <div class="marca-canto">
+        <span class="simbolo-marca pequeno">◢</span>
+        <span>HemoTrack</span>
+    </div>
+</main>
+</body>
+</html>
