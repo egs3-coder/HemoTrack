@@ -37,7 +37,7 @@ Esta segunda entrega apresenta a implementação do cadastro de bolsas de sangue
 
 ## Issue/Bug Tracker
 
-[🐞 Issue/Bug Tracker](https://github.com/egs3-coder/Projeto-Interno/issues)
+[🐞 Issue/Bug Tracker](https://github.com/egs3-coder/HemoTrack/issues)
 
 ---
 
