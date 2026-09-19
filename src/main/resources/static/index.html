@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>HemoTrack · Rota Vital U1</title><link rel="stylesheet" href="/estilo.css"><link rel="stylesheet" href="/tema-hemotrack.css"></head>
+<body>
+<aside class="lateral">
+  <a class="marca" href="#visao"><span class="gota">♥</span><span>Hemo<span class="marca-fina">Track</span><small>GESTÃO DE HEMOCENTRO</small></span></a>
+  <span class="rotulo-nav">ESPAÇO DE TRABALHO</span>
+  <nav aria-label="Navegação principal">
+    <button data-pagina="visao" class="ativo"><span>▦</span>Visão geral</button>
+    <button data-pagina="estoque"><span>▤</span>Estoque de bolsas</button>
+    <button data-pagina="requisicoes"><span>⇄</span>Requisições</button>
+    <button data-pagina="hospitais"><span>✚</span>Hospitais</button>
+    <button data-pagina="historico"><span>◷</span>Histórico</button>
+    <button data-pagina="estruturas"><span>↳</span>Estruturas de dados</button>
+  </nav>
+  <div class="nota-lateral"><span class="ponto"></span> Unidade 1 <p>Projeto Integrador<br>Dados em memória nesta execução.</p></div>
+</aside>
+<div class="conteudo">
+  <header class="barra"><span>HemoTrack U1 <b>/</b> <span id="caminho">Visão geral</span></span><span class="conexao" id="conexao">Conectando…</span></header>
+  <main id="principal" tabindex="-1"><div class="carregando">Carregando os dados da aplicação…</div></main>
+  <footer>Rota Vital · Ambiente acadêmico de simulação · Sem validação clínica de bolsas.</footer>
+</div>
+<div id="aviso" role="status" aria-live="polite"></div>
+<dialog id="modal"><form id="formulario"><div class="cabecalho-modal"><h2 id="titulo-modal"></h2><button type="button" id="fechar-modal" class="icone" aria-label="Fechar">×</button></div><div id="campos"></div><p id="erro-form" role="alert"></p><div class="rodape-modal"><button type="button" class="botao secundario" id="cancelar-modal">Cancelar</button><button type="submit" class="botao" id="salvar">Salvar</button></div></form></dialog>
+<script src="/aplicacao.js" defer></script>
+</body></html>

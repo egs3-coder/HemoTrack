@@ -1,0 +1,1 @@
+56 operações HTTP comparadas: mesmos códigos esperados, mesmos dados de sucesso e mesmo estado após cada operação.

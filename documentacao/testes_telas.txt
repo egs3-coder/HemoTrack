@@ -1,0 +1,2 @@
+java: interface validada; exemplo, FIFO, seleção manual, histórico, lote, percursos e tela móvel; zero erros JavaScript.
+cpp: interface validada; exemplo, FIFO, seleção manual, histórico, lote, percursos e tela móvel; zero erros JavaScript.

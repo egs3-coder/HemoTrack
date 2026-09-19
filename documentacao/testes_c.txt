@@ -1,0 +1,13 @@
+LISTA: vazia, validacao, duplicidade, consulta e remocoes OK
+FILA: FIFO 1,2; reinsercao 3 OK
+PILHA: LIFO 2,1 OK
+ABB: tres percursos; folha, um filho, dois filhos e raiz OK
+FLUXO MANUAL: erros preservam estado; FIFO e LIFO; sem compatibilidade OK
+C: 119 verificacoes aprovadas
+LISTA: vazia, validacao, duplicidade, consulta e remocoes OK
+FILA: FIFO 1,2; reinsercao 3 OK
+PILHA: LIFO 2,1 OK
+ABB: tres percursos; folha, um filho, dois filhos e raiz OK
+FLUXO MANUAL: erros preservam estado; FIFO e LIFO; sem compatibilidade OK
+MEMORIA: zero alocacoes pendentes OK
+C: 155 verificacoes aprovadas

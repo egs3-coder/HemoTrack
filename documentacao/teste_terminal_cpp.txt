@@ -1,0 +1,154 @@
+APROVADO: cadastro de hospital; lote de duas bolsas; requisicao; consulta FIFO; conclusao manual; consulta e retirada do historico; remocao de hospital; estado final vazio.
+
+HemoTrack / Rota Vital - Unidade 1 - C/C++
+
+1 Hospital: cadastrar | 2 Bolsa/lote: cadastrar | 3 Estoque: listar
+4 Bolsa: consultar | 5 Bolsa: remover | 6 Requisicao: inserir
+7 Fila: consultar | 8 Concluir primeira | 9 Cancelar primeira
+10 Historico: listar | 11 Historico: retirar topo | 12 Hospitais: listar
+13 Hospital: consultar | 14 Hospital: remover | 15 Percurso recursivo
+16 Todas as estruturas | 0 Sair
+Opcao: ID: Nome: Cidade: {
+  "cidade": "Recife",
+  "id": 10,
+  "nome": "Hospital Central"
+}
+
+1 Hospital: cadastrar | 2 Bolsa/lote: cadastrar | 3 Estoque: listar
+4 Bolsa: consultar | 5 Bolsa: remover | 6 Requisicao: inserir
+7 Fila: consultar | 8 Concluir primeira | 9 Cancelar primeira
+10 Historico: listar | 11 Historico: retirar topo | 12 Hospitais: listar
+13 Hospital: consultar | 14 Hospital: remover | 15 Percurso recursivo
+16 Todas as estruturas | 0 Sair
+Opcao: ID inicial: Codigo-base: Quantidade (1 a 1000): 1 CONCENTRADO_HEMACIAS  2 PLAQUETAS  3 PLASMA  
+Escolha: 1 O_NEG  2 O_POS  3 A_NEG  4 A_POS  5 B_NEG  6 B_POS  7 AB_NEG  8 AB_POS  
+Escolha: Volume ml: Coleta AAAA-MM-DD: Validade AAAA-MM-DD: [
+  {
+    "codigo": "LOTE-001",
+    "dataColeta": "2026-09-01",
+    "dataValidade": "2026-10-01",
+    "hemocomponente": "CONCENTRADO_HEMACIAS",
+    "id": 101,
+    "tipo": "O_POS",
+    "volumeMl": 450
+  },
+  {
+    "codigo": "LOTE-002",
+    "dataColeta": "2026-09-01",
+    "dataValidade": "2026-10-01",
+    "hemocomponente": "CONCENTRADO_HEMACIAS",
+    "id": 102,
+    "tipo": "O_POS",
+    "volumeMl": 450
+  }
+]
+
+1 Hospital: cadastrar | 2 Bolsa/lote: cadastrar | 3 Estoque: listar
+4 Bolsa: consultar | 5 Bolsa: remover | 6 Requisicao: inserir
+7 Fila: consultar | 8 Concluir primeira | 9 Cancelar primeira
+10 Historico: listar | 11 Historico: retirar topo | 12 Hospitais: listar
+13 Hospital: consultar | 14 Hospital: remover | 15 Percurso recursivo
+16 Todas as estruturas | 0 Sair
+Opcao: ID da requisicao: ID do hospital: 1 CONCENTRADO_HEMACIAS  2 PLAQUETAS  3 PLASMA  
+Escolha: 1 O_NEG  2 O_POS  3 A_NEG  4 A_POS  5 B_NEG  6 B_POS  7 AB_NEG  8 AB_POS  
+Escolha: Quantidade: 1 NORMAL  2 URGENTE  3 EMERGENCIA  
+Escolha: {
+  "hemocomponente": "CONCENTRADO_HEMACIAS",
+  "hospitalId": 10,
+  "id": 1,
+  "quantidade": 2,
+  "tipo": "O_POS",
+  "urgencia": "NORMAL"
+}
+
+1 Hospital: cadastrar | 2 Bolsa/lote: cadastrar | 3 Estoque: listar
+4 Bolsa: consultar | 5 Bolsa: remover | 6 Requisicao: inserir
+7 Fila: consultar | 8 Concluir primeira | 9 Cancelar primeira
+10 Historico: listar | 11 Historico: retirar topo | 12 Hospitais: listar
+13 Hospital: consultar | 14 Hospital: remover | 15 Percurso recursivo
+16 Todas as estruturas | 0 Sair
+Opcao: [
+  {
+    "hemocomponente": "CONCENTRADO_HEMACIAS",
+    "hospitalId": 10,
+    "id": 1,
+    "quantidade": 2,
+    "tipo": "O_POS",
+    "urgencia": "NORMAL"
+  }
+]
+
+1 Hospital: cadastrar | 2 Bolsa/lote: cadastrar | 3 Estoque: listar
+4 Bolsa: consultar | 5 Bolsa: remover | 6 Requisicao: inserir
+7 Fila: consultar | 8 Concluir primeira | 9 Cancelar primeira
+10 Historico: listar | 11 Historico: retirar topo | 12 Hospitais: listar
+13 Hospital: consultar | 14 Hospital: remover | 15 Percurso recursivo
+16 Todas as estruturas | 0 Sair
+Opcao: ID da primeira requisicao: Quantos IDs de bolsas serao informados? ID da bolsa: ID da bolsa: {
+  "hospitalId": 10,
+  "quantidade": 2,
+  "requisicaoId": 1,
+  "tipo": "O_POS"
+}
+
+1 Hospital: cadastrar | 2 Bolsa/lote: cadastrar | 3 Estoque: listar
+4 Bolsa: consultar | 5 Bolsa: remover | 6 Requisicao: inserir
+7 Fila: consultar | 8 Concluir primeira | 9 Cancelar primeira
+10 Historico: listar | 11 Historico: retirar topo | 12 Hospitais: listar
+13 Hospital: consultar | 14 Hospital: remover | 15 Percurso recursivo
+16 Todas as estruturas | 0 Sair
+Opcao: [
+  {
+    "hospitalId": 10,
+    "quantidade": 2,
+    "requisicaoId": 1,
+    "tipo": "O_POS"
+  }
+]
+
+1 Hospital: cadastrar | 2 Bolsa/lote: cadastrar | 3 Estoque: listar
+4 Bolsa: consultar | 5 Bolsa: remover | 6 Requisicao: inserir
+7 Fila: consultar | 8 Concluir primeira | 9 Cancelar primeira
+10 Historico: listar | 11 Historico: retirar topo | 12 Hospitais: listar
+13 Hospital: consultar | 14 Hospital: remover | 15 Percurso recursivo
+16 Todas as estruturas | 0 Sair
+Opcao: ID da requisicao no topo: {
+  "hospitalId": 10,
+  "quantidade": 2,
+  "requisicaoId": 1,
+  "tipo": "O_POS"
+}
+
+1 Hospital: cadastrar | 2 Bolsa/lote: cadastrar | 3 Estoque: listar
+4 Bolsa: consultar | 5 Bolsa: remover | 6 Requisicao: inserir
+7 Fila: consultar | 8 Concluir primeira | 9 Cancelar primeira
+10 Historico: listar | 11 Historico: retirar topo | 12 Hospitais: listar
+13 Hospital: consultar | 14 Hospital: remover | 15 Percurso recursivo
+16 Todas as estruturas | 0 Sair
+Opcao: ID do hospital: {
+  "cidade": "Recife",
+  "id": 10,
+  "nome": "Hospital Central"
+}
+
+1 Hospital: cadastrar | 2 Bolsa/lote: cadastrar | 3 Estoque: listar
+4 Bolsa: consultar | 5 Bolsa: remover | 6 Requisicao: inserir
+7 Fila: consultar | 8 Concluir primeira | 9 Cancelar primeira
+10 Historico: listar | 11 Historico: retirar topo | 12 Hospitais: listar
+13 Hospital: consultar | 14 Hospital: remover | 15 Percurso recursivo
+16 Todas as estruturas | 0 Sair
+Opcao: {
+  "arvore": null,
+  "bolsas": [],
+  "historico": [],
+  "hospitais": [],
+  "requisicoes": []
+}
+
+1 Hospital: cadastrar | 2 Bolsa/lote: cadastrar | 3 Estoque: listar
+4 Bolsa: consultar | 5 Bolsa: remover | 6 Requisicao: inserir
+7 Fila: consultar | 8 Concluir primeira | 9 Cancelar primeira
+10 Historico: listar | 11 Historico: retirar topo | 12 Hospitais: listar
+13 Hospital: consultar | 14 Hospital: remover | 15 Percurso recursivo
+16 Todas as estruturas | 0 Sair
+Opcao: Programa encerrado. Memoria das estruturas sera liberada.

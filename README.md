@@ -1,302 +1,187 @@
-<div align="center">
+# HemoTrack adaptado — Rota Vital / Unidade 1
 
-<img src="./assets/HemoTrack.png" alt="Logo HemoTrack" width="850">
+Esta entrega adapta o HemoTrack fornecido à entrega de Estruturas de Dados.
+Contém **duas aplicações independentes com as mesmas operações de domínio e as
+mesmas telas**: Java com Spring Boot e C/C++ com ponteiros e malloc/free.
 
-# 🩸 HemoTrack
+A versão C/C++ não chama o Java. A interface HTTP e a interface de terminal usam
+as funções implementadas em `c/rota_vital.c`. A versão Java reimplementa os nós e
+operações nas classes em `src/main/java/br/edu/rotavital`.
 
-### Gestão inteligente de hemocomponentes
+O original enviado era a Entrega 02, com FEFO e compatibilidade ABO/Rh. Essas regras
+foram retiradas da adaptação. Datas, hemocomponente, tipo e urgência são dados de
+cadastro. As bolsas são escolhidas manualmente; a urgência não ultrapassa FIFO.
+Não há algoritmos de roteirização, FEFO, hash ou compatibilidade no domínio.
 
-Sistema web voltado ao gerenciamento de estoque, requisições hospitalares,
-compatibilidade sanguínea, distribuição e monitoramento de hemocomponentes.
-
-</div>
-
----
-
-## 📌 Entregas do Projeto
+## Comece aqui — Java no Windows, sem compilar
 
-### 🚀 Entrega 01 (31/08)
+1. Extraia o ZIP inteiro em uma pasta nova.
+2. Tenha **Java 17 ou superior** instalado e disponível no PATH (`java -version`).
+3. Abra `EXECUTAR_JAVA.bat`, ou execute na pasta do projeto:
 
-Esta primeira entrega consolida a especificação dos requisitos do sistema através de histórias de usuário no padrão BDD e a prototipação navegável de baixa fidelidade (Lo-Fi) das jornadas principais.
+```bat
+java -jar executar\hemotrack-u1.jar
+```
 
-* *Histórias de Usuário (.MD):* [Acessar Documento de Histórias de Usuário](https://github.com/egs3-coder/HemoTrack/blob/main/docs/user.stories.md)
-* *Protótipo Lo-Fi no Figma:* [Visualizar Wireframes no Figma](https://www.figma.com/make/eQxxCgBKHDBxbp5wNhSMW7/Lo-fi-prototype-for-HemoTrack--c%C3%B3pia-?t=GAG7zv0kbjXYIOBL-20&fullscreen=1)
-* *Screencast de Apresentação (YouTube):* [Assistir Demonstração no YouTube](https://youtu.be/yJoMx3rl060?si=1mUqssVJ3JXFFymr)
+4. Quando aparecer a mensagem de inicialização, abra **http://127.0.0.1:8080**.
+5. Clique em **Carregar exemplo** para preencher um cenário, ou cadastre seus dados.
 
----
-
-### 🚀 Entrega 02 (21/09)
-
-Esta segunda entrega apresenta a implementação do cadastro de bolsas de sangue e da alocação automática por compatibilidade ABO/Rh e regra FEFO.
-
-* *Histórias de Usuário Implementadas (.MD):* [Acessar Documento de Histórias de Usuário](https://github.com/egs3-coder/HemoTrack/blob/main/docs/entrega_02.md)
-* *Código (SRC):* [Acessar Código das Histórias Implementadas](https://github.com/egs3-coder/HemoTrack/tree/main/src)
-* *Screencast de Apresentação Visual (YouTube):* [Assistir Demonstração no YouTube](https://youtu.be/yJoMx3rl060?si=1mUqssVJ3JXFFymr)
-* *Screencast de Apresentação Código (YouTube):* [Assistir Demonstração no YouTube](https://youtu.be/yJoMx3rl060?si=1mUqssVJ3JXFFymr)
-    
----
-
-### 🚀 Entrega AED 1° UNIDADE 
+O JAR já está compilado e contém as dependências. Não precisa instalar banco de
+dados ou baixar bibliotecas para executá-lo. O terminal deve permanecer aberto.
+Use Ctrl+C para encerrar. O estado fica somente na memória e é perdido ao sair.
 
-* *Código (SRC):* [Acessar Código das Histórias Implementadas](https://github.com/egs3-coder/HemoTrack/tree/main/src)
-*    
----
-
-## Issue/Bug Tracker
-
-[🐞 Issue/Bug Tracker](https://github.com/egs3-coder/HemoTrack/issues)
-
----
-
-## 📌 Sobre o projeto
-
-O **HemoTrack** é uma aplicação desenvolvida para apoiar o controle e a
-distribuição de hemocomponentes entre hemocentros e hospitais.
-
-O sistema busca integrar, em um único fluxo:
-
-- 🏥 requisições hospitalares;
-- 🩸 controle de estoque;
-- 🧬 compatibilidade ABO/Rh;
-- ⏳ priorização FEFO;
-- 🗺️ roteirização;
-- 🌡️ telemetria;
-- 📊 indicadores e dashboard.
-
----
-
-## 👥 Equipe
-
-> As fotos estão associadas **de forma aleatória por enquanto**, conforme solicitado.  
-> Depois vocês podem realocar cada imagem para o integrante correto sem alterar a estrutura.
-
-<table align="center">
-  <tr>
-    <td align="center" width="220">
-      <img src="./assets/Ewerton.jpeg" width="120" height="120"><br>
-      <b>Ewerton Guilherme da Silva</b><br>
-      <sub>Product Owner</sub>
-    </td>
-    <td align="center" width="220">
-      <img src="./assets/Pablo.jpeg" width="120" height="120"><br>
-      <b>Pablo Arthur Eustáquio de Lima</b><br>
-      <sub>Backend Developer</sub>
-    </td>
-    <td align="center" width="220">
-      <img src="./assets/Joao.jpeg" width="120" height="120"><br>
-      <b>João Ricardo Alves de Brito</b><br>
-      <sub>Backend Developer</sub>
-    </td>
-    <td align="center" width="220">
-      <img src="./assets/Lucas.jpeg" width="120" height="120"><br>
-      <b>Lucas Aprigio dos Santos</b><br>
-      <sub>Backend Developer</sub>
-    </td>
-  </tr>
-  <tr>
-    <td align="center">
-      <img src="./assets/Saulo.jpeg" width="120" height="120"><br>
-      <b>Saulo Eduardo Almeida dos Santos</b><br>
-      <sub>Backend Developer</sub>
-    </td>
-    <td align="center">
-      <img src="./assets/Thiago.jpeg" width="120" height="120"><br>
-      <b>Thiago Cardozo da Conceição</b><br>
-      <sub>Frontend / UI Designer</sub>
-    </td>
-    <td align="center">
-      <img src="./assets/Eloi.jpeg" width="120" height="120"><br>
-      <b>Eloi de Lima Sousa</b><br>
-      <sub>Frontend / UI Designer</sub>
-    </td>
-  </tr>
-</table>
+## C/C++ no Windows — as mesmas telas ou o terminal
 
----
+É necessário um compilador **MinGW-w64 com gcc e g++** no PATH. Confira:
 
-## 🎯 Objetivo
+```bat
+gcc --version
+g++ --version
+```
 
-Desenvolver uma solução capaz de atender requisições hospitalares de forma
-organizada, garantindo:
+Na pasta do projeto, execute:
 
-- disponibilidade de bolsas;
-- seleção por compatibilidade sanguínea;
-- priorização pela validade;
-- alocação correta da quantidade;
-- cálculo de rotas de distribuição;
-- atualização de indicadores;
-- monitoramento da telemetria.
+```bat
+compilar_cpp.bat
+```
 
----
+Depois escolha uma interface:
 
-## ⚙️ Funcionalidades principais
+```bat
+build-cpp\hemotrack_cpp.exe
+```
 
-### 🏥 Gestão hospitalar
-- cadastro de hospitais;
-- consulta e atualização;
-- controle de requisições.
+Abra **http://127.0.0.1:8081** para usar as mesmas telas sem Java.
 
-### 🩸 Controle de estoque
-- cadastro de bolsas;
-- tipo sanguíneo e fator Rh;
-- hemocomponente;
-- validade;
-- quantidade disponível;
-- disponibilidade em estoque.
+```bat
+build-cpp\hemotrack_cpp.exe --terminal
+```
 
-### 📋 Requisições
-- hospital solicitante;
-- hemocomponente;
-- tipo sanguíneo;
-- quantidade;
-- nível de urgência;
-- status da solicitação.
+Os atalhos `EXECUTAR_CPP_TELAS.bat` e `EXECUTAR_CPP_TERMINAL.bat` também compilam se
+o executável não existir. Depois de editar C/C++, execute compilar_cpp.bat de novo.
+Os compiladores e scripts Windows são instruções de reprodução; a compilação e os
+testes desta entrega foram realizados no Linux, não em uma máquina Windows.
 
-### 🧬 Inteligência do sistema
-- compatibilidade ABO/Rh;
-- priorização FEFO;
-- alocação da quantidade correta;
-- roteirização;
-- atualização automática do estoque.
+## C/C++ no Linux / WSL
 
----
+```bash
+bash compilar_cpp.sh
+./build-cpp/hemotrack_cpp --terminal
+# Ou, para usar o navegador:
+./build-cpp/hemotrack_cpp
+```
 
-## 📊 Fluxo principal do sistema
+Para outra porta: `./build-cpp/hemotrack_cpp --porta 8082`.
+Execute a partir da pasta principal para localizar `src/main/resources/static`.
+Também pode informar `--static CAMINHO` para essa pasta.
 
-<div align="center">
-  <img src="./assets/fluxo.png" alt="Fluxo completo do sistema" width="520">
-</div>
+## Editar e recompilar Java
 
----
+Abra a pasta inteira no VS Code, IntelliJ ou Eclipse. O ponto de entrada Spring é
+`AplicacaoRotaVital.java`. Execute essa classe com o projeto Maven carregado.
+Não execute arquivos de entidade ou estrutura isoladamente.
+
+Após editar, gere novamente o JAR:
 
-## 🧠 Compatibilidade + FEFO
-
-<div align="center">
-  <img src="./assets/fefo.png" alt="Compatibilidade e FEFO" width="780">
-</div>
-
-### Regra de alocação
-
-Se houver:
-
-- **2 bolsas disponíveis em estoque**
-- e o hospital solicitar **1 bolsa**
-
-o sistema deverá:
-
-- alocar somente **1 bolsa**
-- manter **1 bolsa restante no estoque**
-
----
-
-## 🗺️ Distribuição
-
-<div align="center">
-  <img src="./assets/distribuicao.png" alt="Distribuição para hospitais" width="780">
-</div>
-
-O **HemoTrack** também considera a etapa de distribuição, permitindo
-organizar o envio de hemocomponentes do hemocentro para os hospitais.
-
----
-
-## 🌡️ Telemetria
-
-<div align="center">
-  <img src="./assets/telemetria.png" alt="Fluxo de telemetria" width="900">
-</div>
-
-A telemetria permite acompanhar informações como:
-
-- temperatura;
-- localização;
-- comunicação do transporte;
-- envio dos dados para backend;
-- persistência em banco;
-- exibição em dashboard.
-
----
-
-## 🏗️ Arquitetura geral
-
-<div align="center">
-  <img src="./assets/arquitetura.png" alt="Arquitetura geral do sistema" width="820">
-</div>
-
----
-
-## 🚀 Etapas do desenvolvimento
-
-### 1. Base do sistema
-- modelagem;
-- banco de dados;
-- APIs;
-- CRUD;
-- estoque;
-- requisições.
-
-### 2. Inteligência
-- compatibilidade ABO/Rh;
-- FEFO;
-- hash;
-- roteirização.
-
-### 3. Monitoramento
-- estatísticas;
-- telemetria;
-- concorrência;
-- dashboard.
-
-### 4. Finalização
-- integração;
-- testes;
-- estabilização;
-- documentação;
-- apresentação.
-
----
-
-## 📅 Roadmap
-
-<div align="center">
-  <img src="./assets/roadmap.png" alt="Roadmap HemoTrack" width="1000">
-</div>
-
----
-
-## ✅ Critério de conclusão
-
-O **HemoTrack** será considerado funcional quando for possível demonstrar:
-
-1. o hospital cria a requisição;
-2. o sistema consulta o estoque;
-3. ocorre a validação ABO/Rh;
-4. o sistema aplica FEFO;
-5. a quantidade correta é alocada;
-6. o estoque é atualizado;
-7. a rota é calculada;
-8. a distribuição é registrada;
-9. a telemetria é acompanhada;
-10. os indicadores são atualizados no dashboard.
-
----
-
-## 🛠️ Tecnologias previstas
-
-- **Frontend**
-- **Backend com Spring Boot**
-- **Banco de Dados**
-- **Algoritmos e estruturas de dados**
-- **Dashboard**
-- **Telemetria**
-- **CI/CD**
-
----
-
-<div align="center">
-
-## 🩸 HemoTrack
-
-**Do estoque à entrega, informação para salvar tempo.**
-
-</div>
+```bat
+mvnw.cmd clean package
+java -jar target\rota-vital-1.0.0.jar
+```
+
+No Linux/WSL:
+
+```bash
+./mvnw clean package
+java -jar target/rota-vital-1.0.0.jar
+```
+
+A recompilação requer JDK 17+ e internet para baixar Maven/dependências na primeira
+vez. Spring Boot 4.1.1 foi escolhido por suportar Java 17 até Java 26, conforme
+https://docs.spring.io/spring-boot/system-requirements.html.
+O JAR em `executar` é a versão pronta desta entrega; após editar, use o novo JAR de
+`target` ou copie-o para `executar/hemotrack-u1.jar`.
+
+## O que existe nas duas versões
+
+- Cadastro, consulta, listagem e remoção de bolsas em lista encadeada.
+- Cadastro em lote com códigos e IDs únicos; falha não deixa lote parcial.
+- Código, volume, tipo, hemocomponente, coleta e validade da bolsa.
+- Cadastro, consulta, remoção e três percursos de hospitais em ABB.
+- Nome e cidade dos hospitais.
+- Inserção de requisições na fila, consulta e cancelamento da primeira.
+- Quantidade, hospital, tipo, hemocomponente e urgência informativa do pedido.
+- Conclusão da primeira requisição com IDs de bolsas escolhidos manualmente.
+- Histórico em pilha; consulta e retirada somente pelo topo.
+- Verificação de duplicidade, referências e dados inválidos.
+- Visualização da lista, fila, pilha e ABB nas mesmas telas HTML/CSS/JS.
+
+As aplicações Java e C/C++ têm estados independentes. Não compartilham banco nem
+sincronizam entre si. Para comparar, insira o mesmo cenário nas duas.
+
+## Teste guiado no navegador
+
+1. Carregue o exemplo na página inicial. Isso cria sete hospitais, três bolsas e
+   duas requisições. Também permite visualizar uma ABB com ambos os lados.
+2. Abra Requisições. Somente o primeiro pedido pode ser concluído ou cancelado.
+3. Clique em Concluir e tente confirmar sem escolher a quantidade exigida:
+   a aplicação deve recusar sem alterar o estoque.
+4. Selecione a quantidade correta de IDs. Confirme.
+5. Observe a remoção das bolsas da lista e da requisição da fila.
+6. Abra Histórico: o pedido concluído está no topo. Conclua o próximo e confira LIFO.
+7. Abra Estruturas: alterne os percursos pré-ordem, em-ordem e pós-ordem.
+8. Tente remover um hospital referenciado por pedido ou histórico: deve ser recusado.
+
+A seleção manual não valida se uma bolsa é adequada para um paciente; este é um
+exercício de estruturas e não um sistema para decisões clínicas.
+
+## Testes reproduzíveis
+
+```bash
+./mvnw test
+bash testar_c.sh
+```
+
+O teste C inclui falhas de alocação, AddressSanitizer/UBSan e contagem de nós ainda
+alocados. LeakSanitizer foi desabilitado porque não funciona com a instrumentação
+do ambiente usado; isso é diferente de afirmar que esse detector aprovou a execução.
+
+Para comparar as APIs, inicie as duas aplicações com estado vazio e, em outro
+terminal com Python 3, execute:
+
+```bash
+python documentacao/testar_equivalencia_http.py
+```
+
+O script executa operações nos dois servidores, verifica códigos de resposta e
+compara todo o estado após cada passo. Ele modifica os dados de teste e termina com
+as estruturas vazias. Não rode sobre uma execução com cadastros que queira manter.
+
+## Onde o professor deve olhar
+
+| Conteúdo | Arquivo/pasta |
+|---|---|
+| Structs, ponteiros e contratos | `c/rota_vital.h` |
+| Lista, fila, pilha, ABB, recursão, malloc/free | `c/rota_vital.c` |
+| Menu C++ com iostream e stdio; adaptador HTTP | `cpp/programa.cpp` |
+| Reimplementação em Java | `src/main/java/br/edu/rotavital/*` |
+| API e aplicação Spring | `ApiRotaVital.java`, `AplicacaoRotaVital.java` |
+| Telas compartilhadas | `src/main/resources/static` |
+| Comparação com o HemoTrack original e equivalência | `documentacao/Comparacao_e_Equivalencia.pdf` |
+| Versão editável do documento | `documentacao/Comparacao_e_Equivalencia.md` |
+| Testes e evidências | `src/test`, `c/testes.c`, `documentacao` |
+
+As bibliotecas de HTTP/JSON ficam isoladas em `cpp/terceiros` com suas licenças.
+Elas fazem o transporte e a serialização; não implementam as estruturas avaliadas.
+O núcleo C compila e executa os testes sem essas bibliotecas, Spring ou Java.
+
+## Diferenças deliberadas em relação ao HemoTrack original
+
+O original usa JPA/H2, Thymeleaf, alocação parcial automática, compatibilidade e FEFO.
+A adaptação usa estruturas em memória, a mesma interface estática para ambos os
+servidores e conclusão manual integral em FIFO. O visual mantém a referência escura
+com rosa e ciano, mas a navegação foi ampliada para expor histórico, hospitais e
+estruturas. Não é uma cópia literal de todas as regras da Entrega 02.
+
+O código original de sala continua não fornecido. Confira com o professor se ele
+exige especificamente a autoria/continuidade daquela implementação e preencha os
+dados acadêmicos do grupo antes de entregar. Nada foi enviado ao professor.
