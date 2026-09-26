@@ -44,7 +44,7 @@ Esta segunda entrega apresenta a implementação do cadastro de bolsas de sangue
 
 ### 🚀 Entrega ESTATÍSTICA E PROBABILIDADE 
 
-* *Funcionamento do Projeto Integrador com a Disciplina:* [Acessar Documento em PDF]()  
+* *Funcionamento do Projeto Integrador com a Disciplina:* [Acessar Documento em PDF](https://github.com/egs3-coder/HemoTrack/blob/main/HemoTrack_Estatistica_Probabilidade.pdf)  
     
 ---
 
