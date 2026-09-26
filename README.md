@@ -15,7 +15,7 @@ compatibilidade sanguínea, distribuição e monitoramento de hemocomponentes.
 
 ## 📌 Entregas do Projeto
 
-### 🚀 Entrega 01 (31/08)
+### 🚀 Entrega 01 (31/08) POO
 
 Esta primeira entrega consolida a especificação dos requisitos do sistema através de histórias de usuário no padrão BDD e a prototipação navegável de baixa fidelidade (Lo-Fi) das jornadas principais.
 
@@ -25,7 +25,7 @@ Esta primeira entrega consolida a especificação dos requisitos do sistema atra
 
 ---
 
-### 🚀 Entrega 02 (21/09)
+### 🚀 Entrega 02 (21/09) POO
 
 Esta segunda entrega apresenta a implementação do cadastro de bolsas de sangue e da alocação automática por compatibilidade ABO/Rh e regra FEFO.
 
