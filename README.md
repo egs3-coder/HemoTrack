@@ -74,9 +74,6 @@ O sistema busca integrar, em um único fluxo:
 
 ## 👥 Equipe
 
-> As fotos estão associadas **de forma aleatória por enquanto**, conforme solicitado.  
-> Depois vocês podem realocar cada imagem para o integrante correto sem alterar a estrutura.
-
 <table align="center">
   <tr>
     <td align="center" width="220">
