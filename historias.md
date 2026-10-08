@@ -1,34 +1,34 @@
-# HemoTrack - Histórias de Usuário
+# 🩸 HemoTrack - Histórias de Usuário
 
 Este documento reúne as 11 histórias do HemoTrack. Cada história descreve a necessidade de negócio (sem definir a solução técnica) e traz cenários de validação em BDD com dados concretos, para que possam ser automatizados.
 
 <a id="indice"></a>
 
-## Índice
+## 📑 Índice
 
 | ID | História | Entrega |
 |:--:|----------|:-------:|
-| [US01](#us01) | Requisição emergencial de hemocomponentes | 03 |
-| [US02](#us02) | Criação de conta e acesso à plataforma | 03 |
-| [US03](#us03) | Cadastro e entrada de bolsas no estoque | 02 |
-| [US04](#us04) | Alocação de bolsas compatíveis com prioridade por vencimento | 02 |
-| [US05](#us05) | Rota de entrega mais rápida até o hospital | 04 |
-| [US06](#us06) | Monitoramento de temperatura em trânsito | 04 |
-| [US07](#us07) | Painel gerencial de descarte e eficiência | 04 |
-| [US08](#us08) | Projeção de demanda por tipo sanguíneo | 04 |
-| [US09](#us09) | Cadastro de hospitais conveniados | 03 |
-| [US10](#us10) | Descarte de bolsas vencidas | 03 |
-| [US11](#us11) | Acompanhamento do pedido e confirmação de recebimento | 03 |
+| [US01](#us01) | 🚨 Requisição emergencial de hemocomponentes | 03 |
+| [US02](#us02) | 🔐 Criação de conta e acesso à plataforma | 03 |
+| [US03](#us03) | 🩸 Cadastro e entrada de bolsas no estoque | 02 |
+| [US04](#us04) | 🧬 Alocação de bolsas compatíveis com prioridade por vencimento | 02 |
+| [US05](#us05) | 🚑 Rota de entrega mais rápida até o hospital | 04 |
+| [US06](#us06) | 🌡️ Monitoramento de temperatura em trânsito | 04 |
+| [US07](#us07) | 📊 Painel gerencial de descarte e eficiência | 04 |
+| [US08](#us08) | 📈 Projeção de demanda por tipo sanguíneo | 04 |
+| [US09](#us09) | 🏥 Cadastro de hospitais conveniados | 03 |
+| [US10](#us10) | 🗑️ Descarte de bolsas vencidas | 03 |
+| [US11](#us11) | 📦 Acompanhamento do pedido e confirmação de recebimento | 03 |
 
 ---
 
 <a id="us01"></a>
 
-## US01 - Requisição Emergencial de Hemocomponentes
+## 🚨 US01 - Requisição Emergencial de Hemocomponentes
 
 > **História:** Como profissional de saúde hospitalar, eu gostaria de solicitar hemocomponentes informando o tipo sanguíneo do paciente e o nível de urgência, para que o hemocentro receba o pedido imediatamente e inicie a separação do material adequado.
 
-### Regras de negócio
+### 📋 Regras de negócio
 
 - Hospital de destino, hemocomponente, tipo sanguíneo, quantidade e urgência são obrigatórios.
 - A quantidade deve ser de 1 a 10 bolsas por requisição.
@@ -62,11 +62,11 @@ Este documento reúne as 11 histórias do HemoTrack. Cada história descreve a n
 
 <a id="us02"></a>
 
-## US02 - Criação de Conta e Acesso à Plataforma
+## 🔐 US02 - Criação de Conta e Acesso à Plataforma
 
 > **História:** Como profissional que utiliza o HemoTrack, eu gostaria de criar minha conta e entrar na plataforma com usuário e senha, para que apenas pessoas identificadas consultem e registrem informações sobre o estoque e os pedidos de sangue.
 
-### Regras de negócio
+### 📋 Regras de negócio
 
 - Nome, usuário, perfil, senha e confirmação da senha são obrigatórios para criar a conta.
 - O usuário é único, tem pelo menos 3 caracteres e não contém espaços; a senha tem pelo menos 6 caracteres.
@@ -134,11 +134,11 @@ Este documento reúne as 11 histórias do HemoTrack. Cada história descreve a n
 
 <a id="us03"></a>
 
-## US03 - Cadastro e Entrada de Bolsas de Sangue no Estoque
+## 🩸 US03 - Cadastro e Entrada de Bolsas de Sangue no Estoque
 
 > **História:** Como operador do hemocentro, eu gostaria de registrar a entrada de novas bolsas de sangue informando código, hemocomponente, tipo ABO/Rh e data de validade, para que o estoque permaneça atualizado e rastreável.
 
-### Regras de negócio
+### 📋 Regras de negócio
 
 - O código da bolsa é único.
 - A data de validade deve ser posterior à data atual.
@@ -172,11 +172,11 @@ Este documento reúne as 11 histórias do HemoTrack. Cada história descreve a n
 
 <a id="us04"></a>
 
-## US04 - Alocação de Bolsas Compatíveis com Prioridade por Vencimento
+## 🧬 US04 - Alocação de Bolsas Compatíveis com Prioridade por Vencimento
 
 > **História:** Como operador do hemocentro, eu gostaria que o sistema sugerisse automaticamente as bolsas compatíveis priorizando as de vencimento mais próximo, para que a transfusão seja segura e o descarte por validade seja minimizado.
 
-### Regras de negócio
+### 📋 Regras de negócio
 
 - Só são consideradas bolsas "Disponível", do hemocomponente solicitado e compatíveis em ABO/Rh com o paciente.
 - Entre as compatíveis, é escolhida a de vencimento mais próximo.
@@ -205,11 +205,11 @@ Este documento reúne as 11 histórias do HemoTrack. Cada história descreve a n
 
 <a id="us05"></a>
 
-## US05 - Rota de Entrega Mais Rápida até o Hospital
+## 🚑 US05 - Rota de Entrega Mais Rápida até o Hospital
 
 > **História:** Como coordenador de logística, eu gostaria de saber a rota mais rápida entre o hemocentro e o hospital requisitante, para que o tempo de transporte seja o menor possível e o atendimento ocorra no prazo.
 
-### Regras de negócio
+### 📋 Regras de negócio
 
 - A malha é formada por trechos cadastrados entre pontos (hemocentro e hospitais), cada um com tempo (min) e distância (km).
 - A rota escolhida é a de menor tempo total; a rota fica registrada no pedido.
@@ -243,11 +243,11 @@ Este documento reúne as 11 histórias do HemoTrack. Cada história descreve a n
 
 <a id="us06"></a>
 
-## US06 - Monitoramento de Temperatura em Trânsito
+## 🌡️ US06 - Monitoramento de Temperatura em Trânsito
 
 > **História:** Como responsável pelo controle de qualidade, eu gostaria de acompanhar as leituras de temperatura das caixas térmicas durante o transporte, para que anomalias térmicas sejam detectadas antes que o hemocomponente se torne inviável.
 
-### Regras de negócio
+### 📋 Regras de negócio
 
 - Faixa segura do Concentrado de Hemácias: 2,0 °C a 6,0 °C (limites inclusos).
 - Uma leitura fora da faixa muda o status de conservação para "Alerta - Fora da Faixa".
@@ -287,11 +287,11 @@ Este documento reúne as 11 histórias do HemoTrack. Cada história descreve a n
 
 <a id="us07"></a>
 
-## US07 - Painel Gerencial de Descarte e Eficiência Operacional
+## 📊 US07 - Painel Gerencial de Descarte e Eficiência Operacional
 
 > **História:** Como gestor do hemocentro, eu gostaria de visualizar indicadores de bolsas descartadas e tempo de atendimento, para que eu possa identificar gargalos e tomar decisões corretivas na cadeia de suprimentos.
 
-### Regras de negócio
+### 📋 Regras de negócio
 
 - Taxa de descarte = bolsas descartadas por validade ÷ bolsas que saíram do estoque (entregues + descartadas) no período.
 - SLA = pedidos entregues dentro do tempo previsto ÷ pedidos entregues no período.
@@ -319,11 +319,11 @@ Este documento reúne as 11 histórias do HemoTrack. Cada história descreve a n
 
 <a id="us08"></a>
 
-## US08 - Projeção de Demanda por Tipo Sanguíneo
+## 📈 US08 - Projeção de Demanda por Tipo Sanguíneo
 
 > **História:** Como analista de dados do hemocentro, eu gostaria de visualizar a projeção de demanda e a variação do consumo por tipo sanguíneo, para que as campanhas de doação sejam direcionadas aos tipos com maior risco de desabastecimento.
 
-### Regras de negócio
+### 📋 Regras de negócio
 
 - A projeção do próximo mês é a média (μ) do consumo dos últimos 3 meses; a dispersão é o desvio padrão (σ) desses 3 valores.
 - Um tipo está em "Risco de ruptura" quando o estoque disponível é menor que μ + σ.
@@ -355,11 +355,11 @@ Este documento reúne as 11 histórias do HemoTrack. Cada história descreve a n
 
 <a id="us09"></a>
 
-## US09 - Cadastro de Hospitais Conveniados
+## 🏥 US09 - Cadastro de Hospitais Conveniados
 
 > **História:** Como operador do hemocentro, eu gostaria de cadastrar os hospitais conveniados com seus dados de identificação e região, para que apenas instituições reconhecidas possam solicitar hemocomponentes e as entregas possam ser analisadas por região.
 
-### Regras de negócio
+### 📋 Regras de negócio
 
 - Nome, CNPJ e região são obrigatórios; o CNPJ é único e possui 14 dígitos.
 - Hospital inativo não pode ser escolhido em novas requisições.
@@ -391,11 +391,11 @@ Este documento reúne as 11 histórias do HemoTrack. Cada história descreve a n
 
 <a id="us10"></a>
 
-## US10 - Descarte de Bolsas Vencidas
+## 🗑️ US10 - Descarte de Bolsas Vencidas
 
 > **História:** Como operador do hemocentro, eu gostaria que as bolsas com validade vencida fossem retiradas do estoque e registradas como descarte, para que nenhuma bolsa imprópria seja alocada a um paciente e as perdas fiquem documentadas.
 
-### Regras de negócio
+### 📋 Regras de negócio
 
 - A verificação pode ser acionada pelo operador e também ocorre periodicamente.
 - Bolsa vencida passa para "Descartada" com motivo "Validade vencida" e data do descarte.
@@ -430,11 +430,11 @@ Este documento reúne as 11 histórias do HemoTrack. Cada história descreve a n
 
 <a id="us11"></a>
 
-## US11 - Acompanhamento do Pedido e Confirmação de Recebimento
+## 📦 US11 - Acompanhamento do Pedido e Confirmação de Recebimento
 
 > **História:** Como profissional de saúde hospitalar, eu gostaria de acompanhar a situação do meu pedido e confirmar o recebimento das bolsas, para que eu saiba quando o material chegará e o hemocentro tenha o registro de que a entrega foi concluída.
 
-### Regras de negócio
+### 📋 Regras de negócio
 
 - Sequência de status: "Pendente de Alocação" → "Alocada" → "Em Transporte" → "Entregue".
 - Só é possível confirmar o recebimento de pedido "Em Transporte".
