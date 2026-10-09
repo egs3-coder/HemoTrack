@@ -36,7 +36,7 @@ Esta segunda entrega apresenta a implementação do cadastro de bolsas de sangue
     
 ---
 
-### 🚀 Entrega 03 (21/09) POO
+### 🚀 Entrega 03 (19/10) POO
 
 
 
