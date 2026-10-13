@@ -1,4 +1,4 @@
-# 🩸 HemoTrack - Histórias de Usuário
+
 
 Este documento reúne as 11 histórias do HemoTrack. Cada história descreve a necessidade de negócio (sem definir a solução técnica) e traz cenários de validação em BDD com dados concretos, para que possam ser automatizados.
 
