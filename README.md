@@ -39,8 +39,7 @@ Esta segunda entrega apresenta a implementação do cadastro de bolsas de sangue
 ### 🚀 Entrega 03 (19/10) POO
 
 
-* *Histórias de Usuário Completa (.MD):* [Acessar Documento de Histórias de Usuário](https://github.com/egs3-coder/HemoTrack/blob/main/historias.md)
-* *Histórias de Usuário Implementadas (.MD):* [Acessar Documento de Histórias de Usuário](https://github.com/egs3-coder/HemoTrack/blob/main/docs/entrega_02.md)
+* *Histórias de Usuário (.MD):* [Acessar Documento de Histórias de Usuário](https://github.com/egs3-coder/HemoTrack/blob/main/historias.md)
 * *Código (SRC):* [Acessar Código das Histórias Implementadas](https://github.com/egs3-coder/HemoTrack/blob/main/hemotrack.zip)
 * *Screencast de Apresentação Visual (YouTube):* [Assistir Demonstração no YouTube](https://www.youtube.com/watch?v=9VsLCPvG6z4)
 * *Screencast de Apresentação Código (YouTube):* [Assistir Demonstração no YouTube](https://www.youtube.com/watch?v=GqtDUjp6YH0)
