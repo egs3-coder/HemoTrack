@@ -46,23 +46,16 @@ Esta segunda entrega apresenta a implementação do cadastro de bolsas de sangue
     
 ---
 
-### 🚀 Entrega AED 1° UNIDADE 
+## Issue/Bug Tracker
 
-* *Código :* [Acessar Código das Histórias Implementadas](https://github.com/egs3-coder/HemoTrack/blob/main/hemotrack.cpp)
-* *Funcionamento:* [Acessar Documento em PDF](https://github.com/egs3-coder/HemoTrack/blob/main/HemoTrack_AED.pdf)     
+[🐞 Issue/Bug Tracker](https://github.com/egs3-coder/HemoTrack/issues)
+
 ---
 
 ### 🚀 Entrega ESTATÍSTICA E PROBABILIDADE 
 
 * *Funcionamento do Projeto Integrador com a Disciplina:* [Acessar Documento em PDF](https://github.com/egs3-coder/HemoTrack/blob/main/HemoTrack_Estatistica_Probabilidade.pdf)  
     
----
-
-
-## Issue/Bug Tracker
-
-[🐞 Issue/Bug Tracker](https://github.com/egs3-coder/HemoTrack/issues)
-
 ---
 
 ## 📌 Sobre o projeto
