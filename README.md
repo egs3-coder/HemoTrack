@@ -52,6 +52,26 @@ Esta segunda entrega apresenta a implementação do cadastro de bolsas de sangue
 
 ---
 
+## 🛠️ Tecnologias utilizadas
+
+| | Tecnologia | Para que é usada no HemoTrack |
+|:-:|---|---|
+| ☕ | **Java 17** | Linguagem de todo o sistema: regras de negócio, entidades e serviços |
+| 🌱 | **Spring Boot 3.3.5** (Web MVC) | Servidor web, controllers das telas e API REST do sensor de temperatura |
+| 🗄️ | **Spring Data JPA + Hibernate** | Acesso ao banco: repositórios, consultas e controle de concorrência (`@Version`) |
+| 💾 | **H2 Database** | Banco de dados gravado em arquivo (pasta `data`), sem instalar nada |
+| 🖼️ | **Thymeleaf** | Páginas HTML geradas no servidor (login, painel, estoque, pedidos, dashboard) |
+| ⏰ | **Spring Scheduling** | Rotina diária das 00:05 que descarta bolsas vencidas (US10) |
+| 🔐 | **Java Security (PBKDF2)** | Senhas com hash e salt, código de recuperação e proteção CSRF, sem bibliotecas externas |
+| 🎨 | **HTML5 + CSS3** | Layout responsivo das telas, cartões, gráficos de barras e etiquetas de status |
+| ⚡ | **JavaScript** | Aviso em tempo real de usuário já existente e filtros da demanda preditiva |
+| 🧪 | **JUnit 5 + Mockito + MockMvc** | Testes automatizados de cada cenário das histórias e de cada issue corrigida |
+| 📦 | **Maven** | Build, dependências e execução dos testes (`mvn test`) |
+| 🔀 | **Git + GitHub** | Versionamento do código e rastreamento de issues |
+| ⚙️ | **C++17** | Versão das regras de negócio do sistema (requisição, estoque, alocação, rota, temperatura e demanda), portada do código Java |
+
+---
+
 ### 🚀 Entrega ESTATÍSTICA E PROBABILIDADE 
 
 * *Funcionamento do Projeto Integrador com a Disciplina:* [Acessar Documento em PDF](https://github.com/egs3-coder/HemoTrack/blob/main/HemoTrack_Estatistica_Probabilidade.pdf)  
@@ -287,20 +307,6 @@ O **HemoTrack** será considerado funcional quando for possível demonstrar:
 10. os indicadores são atualizados no dashboard.
 
 ---
-
-## 🛠️ Tecnologias previstas
-
-- **Frontend**
-- **Backend com Spring Boot**
-- **Banco de Dados**
-- **Algoritmos e estruturas de dados**
-- **Dashboard**
-- **Telemetria**
-- **CI/CD**
-
----
-
-<div align="center">
 
 ## 🩸 HemoTrack
 
