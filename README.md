@@ -27,7 +27,7 @@ Esta primeira entrega consolida a especificação dos requisitos do sistema atra
 
 ### 🚀 Entrega 02 (21/09) POO
 
-
+Esta segunda entrega apresenta a implementação do cadastro de bolsas de sangue e da alocação automática por compatibilidade ABO/Rh e regra FEFO.
 
 * *Histórias de Usuário Implementadas (.MD):* [Acessar Documento de Histórias de Usuário](https://github.com/egs3-coder/HemoTrack/blob/main/docs/entrega_02.md)
 * *Código (SRC):* [Acessar Código das Histórias Implementadas](https://github.com/egs3-coder/HemoTrack/tree/main/src/main/java/br/com/hemotrack)
