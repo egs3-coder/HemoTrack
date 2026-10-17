@@ -291,23 +291,6 @@ A telemetria permite acompanhar informações como:
 
 ---
 
-## ✅ Critério de conclusão
-
-O **HemoTrack** será considerado funcional quando for possível demonstrar:
-
-1. o hospital cria a requisição;
-2. o sistema consulta o estoque;
-3. ocorre a validação ABO/Rh;
-4. o sistema aplica FEFO;
-5. a quantidade correta é alocada;
-6. o estoque é atualizado;
-7. a rota é calculada;
-8. a distribuição é registrada;
-9. a telemetria é acompanhada;
-10. os indicadores são atualizados no dashboard.
-
----
-
 ## 🩸 HemoTrack
 
 **Do estoque à entrega, informação para salvar tempo.**
