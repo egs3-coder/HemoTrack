@@ -15,24 +15,6 @@ compatibilidade sanguínea, distribuição e monitoramento de hemocomponentes.
 
 ## 📌 Entregas do Projeto
 
-### 🚀 Entrega 01 (31/08) POO
-
-Esta primeira entrega consolida a especificação dos requisitos do sistema através de histórias de usuário no padrão BDD e a prototipação navegável de baixa fidelidade (Lo-Fi) das jornadas principais.
-
-* *Histórias de Usuário (.MD):* [Acessar Documento de Histórias de Usuário](https://github.com/egs3-coder/HemoTrack/blob/main/docs/user.stories.md)
-* *Protótipo Lo-Fi no Figma:* [Visualizar Wireframes no Figma](https://www.figma.com/make/eQxxCgBKHDBxbp5wNhSMW7/Lo-fi-prototype-for-HemoTrack--c%C3%B3pia-?t=GAG7zv0kbjXYIOBL-20&fullscreen=1)
-* *Screencast de Apresentação (YouTube):* [Assistir Demonstração no YouTube](https://youtu.be/yJoMx3rl060?si=1mUqssVJ3JXFFymr)
-
----
-
-### 🚀 Entrega 02 (21/09) POO
-
-Esta segunda entrega apresenta a implementação do cadastro de bolsas de sangue e da alocação automática por compatibilidade ABO/Rh e regra FEFO.
-
-* *Histórias de Usuário Implementadas (.MD):* [Acessar Documento de Histórias de Usuário](https://github.com/egs3-coder/HemoTrack/blob/main/docs/entrega_02.md)
-* *Código (SRC):* [Acessar Código das Histórias Implementadas](https://github.com/egs3-coder/HemoTrack/tree/main/src/main/java/br/com/hemotrack)
-* *Screencast de Apresentação Visual (YouTube):* [Assistir Demonstração no YouTube](https://www.youtube.com/watch?v=9VsLCPvG6z4)
-* *Screencast de Apresentação Código (YouTube):* [Assistir Demonstração no YouTube](https://www.youtube.com/watch?v=GqtDUjp6YH0)
     
 ---
 
@@ -70,12 +52,6 @@ Esta segunda entrega apresenta a implementação do cadastro de bolsas de sangue
 | 🔀 | **Git + GitHub** | Versionamento do código e rastreamento de issues |
 | ⚙️ | **C++17** | Versão das regras de negócio do sistema (requisição, estoque, alocação, rota, temperatura e demanda), portada do código Java |
 
----
-
-### 🚀 Entrega ESTATÍSTICA E PROBABILIDADE 
-
-* *Funcionamento do Projeto Integrador com a Disciplina:* [Acessar Documento em PDF](https://github.com/egs3-coder/HemoTrack/blob/main/HemoTrack_Estatistica_Probabilidade.pdf)  
-    
 ---
 
 ## 📌 Sobre o projeto
