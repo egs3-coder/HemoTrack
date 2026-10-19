@@ -22,7 +22,7 @@ compatibilidade sanguínea, distribuição e monitoramento de hemocomponentes.
 
 * *Histórias de Usuário (.MD):* [Acessar Documento de Histórias de Usuário](https://github.com/egs3-coder/HemoTrack/blob/main/historias.md)
 * *Código (SRC):* [Acessar Código das Histórias Implementadas](https://github.com/egs3-coder/HemoTrack/blob/main/hemotrack.zip)
-* *Screencast de Apresentação Visual (YouTube):* [Assistir Demonstração no YouTube](https://youtu.be/C06QlTQAB_Q)
+* *Screencast de Apresentação Visual (YouTube):* [Assistir Demonstração no YouTube](https://youtu.be/_C9ef-cF5FQ)
 * *Screencast de Apresentação Código (YouTube):* [Assistir Demonstração no YouTube](https://www.youtube.com/watch?v=GqtDUjp6YH0)
     
 ---
