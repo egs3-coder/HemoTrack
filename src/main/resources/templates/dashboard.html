@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: cabeca('Dashboard')}"></head>
+<body>
+<header th:replace="~{fragments :: topo}"></header>
+<main class="conteudo">
+    <h1>Dashboard operacional</h1>
+    <form class="linha" th:action="@{/dashboard}" method="get">
+        <label>Período
+            <select name="dias">
+                <option value="7" th:selected="${dias == 7}">Últimos 7 dias</option>
+                <option value="30" th:selected="${dias == 30}">Últimos 30 dias</option>
+                <option value="90" th:selected="${dias == 90}">Últimos 90 dias</option>
+            </select>
+        </label>
+        <button type="submit">Gerar Dashboard Operacional</button>
+    </form>
+
+    <p class="aviso" th:if="${d != null and d.vazio}">Não há dados para o período selecionado</p>
+
+    <div th:if="${d != null and !d.vazio}">
+        <div class="cartoes">
+            <div class="cartao largo">
+                <span class="rotulo">Taxa de descarte por validade</span>
+                <strong th:text="${d.taxaDescarte} + '%'">10%</strong>
+                <div class="barra"><div class="alerta" th:style="'width:' + ${d.taxaDescarte} + '%'"></div></div>
+                <span class="rotulo" th:text="${d.bolsasDescartadas} + ' descartadas de ' + ${d.bolsasEntregues + d.bolsasDescartadas} + ' saídas'"></span>
+            </div>
+            <div class="cartao largo">
+                <span class="rotulo">Atendimento no prazo (SLA)</span>
+                <strong th:text="${d.temPedidos} ? ${d.sla} + '%' : '-'">90%</strong>
+                <div class="barra"><div th:style="'width:' + ${d.sla} + '%'"></div></div>
+                <span class="rotulo" th:text="${d.pedidosNoPrazo} + ' de ' + ${d.pedidosEntregues} + ' pedidos entregues'"></span>
+            </div>
+        </div>
+
+        <h2>Tempo médio de entrega por região</h2>
+        <div class="rolagem">
+            <table>
+                <thead><tr><th>Região</th><th>Tempo médio</th></tr></thead>
+                <tbody>
+                <tr th:each="item : ${d.tempoMedioPorRegiao}">
+                    <td th:text="${item.key}"></td>
+                    <td th:text="${item.value} + ' min'"></td>
+                </tr>
+                <tr th:if="${#maps.isEmpty(d.tempoMedioPorRegiao)}"><td colspan="2">Nenhum pedido entregue no período.</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p><a class="botao secundario" th:href="@{/dashboard/exportar(dias=${dias})}">Exportar resumo</a></p>
+    </div>
+</main>
+</body>
+</html>

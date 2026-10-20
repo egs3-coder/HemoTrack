@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="cabeca(titulo)">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${titulo} + ' - HemoTrack'">HemoTrack</title>
+    <link rel="stylesheet" th:href="@{/css/estilo.css(v=3)}">
+</head>
+<body>
+<header th:fragment="topo">
+    <nav class="menu">
+        <a class="marca" th:href="@{/}">HemoTrack</a>
+        <a th:href="@{/requisicoes}">Requisições</a>
+        <a th:href="@{/bolsas}">Estoque</a>
+        <a th:href="@{/hospitais}">Hospitais</a>
+        <a th:href="@{/trechos}">Malha de rotas</a>
+        <a th:href="@{/dashboard}">Dashboard</a>
+        <a th:href="@{/demanda}">Demanda preditiva</a>
+        <form class="sessao" th:if="${session.usuarioNome != null}" th:action="@{/logout}" method="post">
+            <span th:text="${session.usuarioNome} + ' (' + ${session.usuarioPerfil} + ')'"></span>
+            <button type="submit" class="pequeno">Sair</button>
+        </form>
+    </nav>
+    <div class="conteudo">
+        <p class="aviso sucesso" th:if="${sucesso}" th:text="${sucesso}"></p>
+        <p class="aviso erro" th:if="${erro}" th:text="${erro}"></p>
+    </div>
+</header>
+</body>
+</html>

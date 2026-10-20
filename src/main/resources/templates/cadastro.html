@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: cabeca('Criar conta')}"></head>
+<body>
+<!-- US02 - cenarios 1 a 4: criacao de conta -->
+<main class="conteudo login">
+    <h1>Criar conta</h1>
+    <p class="sub">Preencha os dados para acessar o HemoTrack.</p>
+    <p class="aviso erro" th:if="${erro}" th:text="${erro}" role="alert"></p>
+    <form class="formulario" th:action="@{/cadastro}" method="post">
+        <label>Nome completo
+            <input type="text" name="nome" th:value="${nome}" autocomplete="name" autofocus required>
+        </label>
+        <label>Usuário (mínimo de 3 caracteres, sem espaços)
+            <input type="text" name="login" id="campo-usuario" th:value="${login}" autocomplete="username"
+                   th:attr="data-verificar=@{/cadastro/verificar-usuario}" aria-describedby="aviso-usuario" required>
+            <span id="aviso-usuario" class="dica" aria-live="polite"></span>
+        </label>
+        <label>Perfil
+            <select name="perfil" required>
+                <option value="">Selecione</option>
+                <option th:each="p : ${perfis}" th:value="${p}" th:text="${p.rotulo}"
+                        th:selected="${perfilSelecionado == p}"></option>
+            </select>
+        </label>
+        <label>Senha (mínimo de 6 caracteres)
+            <input type="password" name="senha" autocomplete="new-password" required>
+        </label>
+        <label>Confirmar senha
+            <input type="password" name="confirmacao" autocomplete="new-password" required>
+        </label>
+        <button type="submit">Criar conta e entrar</button>
+    </form>
+    <p class="sub rodape">Já tem conta? <a th:href="@{/login}">Entrar</a></p>
+</main>
+<script>
+    // Avisa enquanto a pessoa digita se o usuario ja existe (a validacao final continua no servidor).
+    (function () {
+        var campo = document.getElementById('campo-usuario');
+        var aviso = document.getElementById('aviso-usuario');
+        var url = campo.getAttribute('data-verificar');
+        var espera;
+        function verificar() {
+            var valor = campo.value.trim();
+            if (!valor) { aviso.textContent = ''; campo.classList.remove('invalido'); return; }
+            fetch(url + '?login=' + encodeURIComponent(valor), { headers: { 'Accept': 'application/json' } })
+                .then(function (r) { return r.ok ? r.json() : null; })
+                .then(function (dados) {
+                    if (!dados || campo.value.trim() !== valor) { return; }
+                    aviso.textContent = dados.mensagem;
+                    aviso.className = 'dica ' + (dados.disponivel ? 'ok' : 'erro');
+                    campo.classList.toggle('invalido', !dados.disponivel);
+                })
+                .catch(function () { aviso.textContent = ''; });
+        }
+        campo.addEventListener('input', function () { clearTimeout(espera); espera = setTimeout(verificar, 400); });
+        campo.addEventListener('blur', verificar);
+        if (campo.value) { verificar(); }
+    })();
+</script>
+</body>
+</html>

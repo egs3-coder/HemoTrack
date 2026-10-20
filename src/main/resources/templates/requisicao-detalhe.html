@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: cabeca('Pedido')}"></head>
+<body>
+<header th:replace="~{fragments :: topo}"></header>
+<main class="conteudo">
+    <h1>Pedido <span th:text="${r.codigo}">REQ-0001</span>
+        <span class="etiqueta" th:classappend="${'st-' + r.status.name()}" th:text="${r.status.rotulo}"></span>
+    </h1>
+
+    <!-- US11: sequencia de status do pedido -->
+    <ol class="etapas" aria-label="Andamento do pedido">
+        <li th:each="st, i : ${etapas}"
+            th:classappend="${i.index < r.etapa} ? 'feita' : (${i.index == r.etapa} ? 'atual' : '')"
+            th:text="${st.rotulo}">Pendente de Alocação</li>
+    </ol>
+
+    <dl class="dados">
+        <dt>Hospital</dt><dd th:text="${r.hospital.nome + ' (' + r.hospital.regiao + ')'}"></dd>
+        <dt>Hemocomponente</dt><dd th:text="${r.hemocomponente.rotulo}"></dd>
+        <dt>Tipo sanguíneo do paciente</dt><dd th:text="${r.tipoSanguineo.rotulo}"></dd>
+        <dt>Quantidade</dt><dd th:text="${r.quantidade}"></dd>
+        <dt>Urgência</dt><dd th:text="${r.urgencia.rotulo}"></dd>
+        <dt>Criado em</dt><dd th:text="${#temporals.format(r.dataCriacao, 'dd/MM/yyyy HH:mm')}"></dd>
+        <dt th:if="${r.dataDespacho != null}">Despachado em</dt>
+        <dd th:if="${r.dataDespacho != null}" th:text="${#temporals.format(r.dataDespacho, 'dd/MM/yyyy HH:mm')}"></dd>
+        <dt th:if="${r.dataEntrega != null}">Entregue em</dt>
+        <dd th:if="${r.dataEntrega != null}" th:text="${#temporals.format(r.dataEntrega, 'dd/MM/yyyy HH:mm')}"></dd>
+    </dl>
+
+    <h2>Próxima ação</h2>
+    <div class="linha">
+        <form th:if="${r.status.name() == 'PENDENTE'}" th:action="@{/requisicoes/{id}/alocar(id=${r.id})}" method="post">
+            <button type="submit">Processar alocação</button>
+        </form>
+        <form th:if="${r.status.name() == 'ALOCADA'}" th:action="@{/requisicoes/{id}/rota(id=${r.id})}" method="post">
+            <button type="submit" th:classappend="${r.itinerario != null} ? 'secundario'">Gerar rota</button>
+        </form>
+        <form th:if="${r.status.name() == 'ALOCADA' and r.itinerario != null}"
+              th:action="@{/requisicoes/{id}/despachar(id=${r.id})}" method="post">
+            <button type="submit">Despachar pedido</button>
+        </form>
+        <!-- Fica disponivel em qualquer status para demonstrar o cenario 3 da US11 -->
+        <form th:if="${r.status.name() != 'ENTREGUE'}" th:action="@{/requisicoes/{id}/confirmar(id=${r.id})}" method="post">
+            <button type="submit" th:classappend="${r.status.name() != 'EM_TRANSPORTE'} ? 'secundario'">Confirmar recebimento</button>
+        </form>
+        <span th:if="${r.status.name() == 'ENTREGUE'}">Pedido concluído.</span>
+    </div>
+
+    <h2>Bolsas do pedido</h2>
+    <div class="rolagem">
+        <table>
+            <thead><tr><th>Código</th><th>Tipo</th><th>Validade</th><th>Status</th></tr></thead>
+            <tbody>
+            <tr th:each="b : ${bolsas}">
+                <td th:text="${b.codigo}"></td>
+                <td th:text="${b.tipoSanguineo.rotulo}"></td>
+                <td th:text="${#temporals.format(b.dataValidade, 'dd/MM/yyyy')}"></td>
+                <td><span class="etiqueta" th:classappend="${'st-' + b.status.name()}" th:text="${b.status.rotulo}"></span></td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(bolsas)}"><td colspan="4">Nenhuma bolsa alocada ainda.</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h2>Rota de entrega</h2>
+    <p th:if="${r.itinerario == null}">Rota ainda não gerada.</p>
+    <dl class="dados" th:if="${r.itinerario != null}">
+        <dt>Itinerário</dt><dd th:text="${r.itinerario}"></dd>
+        <dt>Distância total</dt><dd th:text="${r.distanciaFormatada} + ' km'"></dd>
+        <dt>Tempo previsto</dt><dd th:text="${r.tempoPrevistoMin} + ' min'"></dd>
+    </dl>
+
+    <h2>Temperatura em trânsito</h2>
+    <p th:if="${r.statusConservacao == null}">O monitoramento começa quando o pedido é despachado.</p>
+    <div th:if="${r.statusConservacao != null}">
+        <p>Status de conservação:
+            <span class="etiqueta" th:classappend="${'cs-' + r.statusConservacao.name()}" th:text="${r.statusConservacao.rotulo}"></span>
+            <span class="sub" th:text="'Faixa segura: ' + ${r.hemocomponente.faixaFormatada}"></span>
+        </p>
+        <form class="linha" th:if="${r.status.name() == 'EM_TRANSPORTE'}"
+              th:action="@{/requisicoes/{id}/leituras(id=${r.id})}" method="post">
+            <input type="number" step="0.1" name="temperatura" placeholder="4.2" required>
+            <button type="submit" class="secundario">Registrar leitura</button>
+        </form>
+        <p class="sub">O sensor também pode enviar leituras pela API:
+            <code th:text="'POST /api/requisicoes/' + ${r.codigo} + '/leituras'"></code>
+        </p>
+        <p class="sub" th:text="'Histórico de telemetria: ' + ${#lists.size(leituras)} + (${#lists.size(leituras) == 1} ? ' leitura' : ' leituras')"></p>
+        <div class="rolagem">
+            <table>
+                <thead><tr><th>Data e hora</th><th>Temperatura</th><th>Situação</th></tr></thead>
+                <tbody>
+                <tr th:each="l : ${leituras}">
+                    <td th:text="${#temporals.format(l.dataHora, 'dd/MM/yyyy HH:mm:ss')}"></td>
+                    <td th:text="${l.temperaturaFormatada}"></td>
+                    <td th:text="${l.foraDaFaixa} ? 'Fora da faixa' : 'Dentro da faixa'"
+                        th:classappend="${l.foraDaFaixa} ? 'vencida'"></td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(leituras)}"><td colspan="3">Nenhuma leitura recebida.</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: cabeca('Requisições')}"></head>
+<body>
+<header th:replace="~{fragments :: topo}"></header>
+<main class="conteudo">
+    <h1>Requisições</h1>
+    <div class="linha">
+        <a class="botao" th:href="@{/requisicoes/nova}">Nova requisição</a>
+        <form class="linha" th:action="@{/requisicoes/consulta}" method="get">
+            <input type="text" name="codigo" placeholder="REQ-0001" required>
+            <button type="submit" class="secundario">Consultar pedido</button>
+        </form>
+    </div>
+    <div class="rolagem">
+        <table>
+            <thead>
+            <tr>
+                <th>Identificador</th><th>Hospital</th><th>Hemocomponente</th><th>Tipo</th>
+                <th>Qtd.</th><th>Urgência</th><th>Status</th><th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="r : ${requisicoes}">
+                <td th:text="${r.codigo}"></td>
+                <td th:text="${r.hospital.nome}"></td>
+                <td th:text="${r.hemocomponente.rotulo}"></td>
+                <td th:text="${r.tipoSanguineo.rotulo}"></td>
+                <td th:text="${r.quantidade}"></td>
+                <td th:text="${r.urgencia.rotulo}"></td>
+                <td><span class="etiqueta" th:classappend="${'st-' + r.status.name()}" th:text="${r.status.rotulo}"></span></td>
+                <td><a th:href="@{/requisicoes/{id}(id=${r.id})}">Abrir</a></td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(requisicoes)}"><td colspan="8">Nenhuma requisição registrada.</td></tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+</body>
+</html>

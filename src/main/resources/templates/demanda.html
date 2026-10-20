@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: cabeca('Demanda preditiva')}"></head>
+<body>
+<header th:replace="~{fragments :: topo}"></header>
+<!-- US08 - Projecao de demanda por tipo sanguineo -->
+<main class="conteudo">
+    <h1>Demanda preditiva</h1>
+    <p class="sub">
+        Projeção para o próximo mês: média (μ) e desvio padrão (σ) do consumo dos 3 meses anteriores
+        (<span th:text="${#temporals.format(meses[0].atDay(1), 'MM/yyyy')}"></span> a
+        <span th:text="${#temporals.format(meses[2].atDay(1), 'MM/yyyy')}"></span>).
+        Um tipo está em risco quando o estoque disponível é menor que μ + σ.
+    </p>
+
+    <!-- Resumo -->
+    <div class="cartoes">
+        <div class="cartao kpi risco">
+            <span class="rotulo">Tipos em risco de ruptura</span>
+            <strong th:text="${resumo.tiposEmRisco}">1</strong>
+        </div>
+        <div class="cartao kpi adequado">
+            <span class="rotulo">Tipos com estoque adequado</span>
+            <strong th:text="${resumo.tiposAdequados}">1</strong>
+        </div>
+        <div class="cartao kpi insuficiente">
+            <span class="rotulo">Sem histórico suficiente</span>
+            <strong th:text="${resumo.tiposSemHistorico}">6</strong>
+        </div>
+        <div class="cartao kpi">
+            <span class="rotulo">Demanda projetada (Σ μ)</span>
+            <strong th:text="${resumo.demandaProjetada}">34</strong>
+            <span class="rotulo">bolsas no próximo mês</span>
+        </div>
+        <div class="cartao kpi">
+            <span class="rotulo">Bolsas a captar</span>
+            <strong th:text="${resumo.bolsasACaptar}">6</strong>
+            <span class="rotulo">para sair do risco</span>
+        </div>
+    </div>
+
+    <!-- Prioridade das campanhas -->
+    <h2>Prioridade para campanhas de doação</h2>
+    <p class="aviso sucesso" th:if="${#lists.isEmpty(prioridades)}">Nenhum tipo em risco de ruptura no momento.</p>
+    <ol class="prioridades" th:unless="${#lists.isEmpty(prioridades)}">
+        <li th:each="p, i : ${prioridades}" class="prioridade">
+            <span class="posicao" th:text="${i.count}">1</span>
+            <span class="tipo-grande" th:text="${p.tipo.rotulo}">O-</span>
+            <div class="prioridade-texto">
+                <strong>
+                    <span th:text="${p.situacao}">Risco de ruptura</span>
+                    <span class="etiqueta" th:classappend="${p.prioridade == 'Crítica'} ? 'pr-critica' : 'pr-alta'"
+                          th:text="'Prioridade ' + ${#strings.toLowerCase(p.prioridade)}">Prioridade crítica</span>
+                </strong>
+                <span class="sub">
+                    Captar ao menos <b th:text="${p.bolsasACaptar}">5</b> bolsa(s) ·
+                    estoque de <span th:text="${p.estoqueDisponivel}">8</span> cobre cerca de
+                    <span th:text="${p.coberturaDias}">20</span> dias ·
+                    consumo em <span th:text="${#strings.toLowerCase(p.tendencia)}">alta</span>
+                </span>
+            </div>
+        </li>
+    </ol>
+
+    <!-- Panorama por tipo -->
+    <h2>Panorama por tipo sanguíneo</h2>
+    <div class="filtros" role="group" aria-label="Filtrar tipos">
+        <button type="button" class="filtro ativo" data-filtro="todos">Todos</button>
+        <button type="button" class="filtro" data-filtro="risco">Em risco</button>
+        <button type="button" class="filtro" data-filtro="adequado">Adequados</button>
+        <button type="button" class="filtro" data-filtro="insuficiente">Sem histórico</button>
+    </div>
+    <div class="grade-tipos">
+        <article class="cartao-tipo" th:each="p : ${projecoes}" th:classappend="${p.categoria}"
+                 th:attr="data-categoria=${p.categoria}">
+            <header>
+                <span class="tipo-grande" th:text="${p.tipo.rotulo}">O-</span>
+                <span class="etiqueta" th:classappend="${'sit-' + p.categoria}"
+                      th:text="${p.historicoSuficiente} ? ${p.situacao} : 'Histórico insuficiente'">Risco de ruptura</span>
+            </header>
+
+            <div class="mini-grafico" th:attr="aria-label='Consumo mensal: ' + ${#strings.listJoin(p.consumoMensal, ', ')}">
+                <div class="coluna" th:each="c, i : ${p.consumoMensal}">
+                    <span class="valor" th:text="${c}">10</span>
+                    <div class="haste"><div th:style="'height:' + ${p.alturasConsumo[i.index]} + '%'"></div></div>
+                    <span class="mes" th:text="${#temporals.format(meses[i.index].atDay(1), 'MM/yy')}">07/26</span>
+                </div>
+            </div>
+
+            <div th:if="${p.historicoSuficiente}">
+                <div class="medidor" th:title="'Estoque ' + ${p.estoqueDisponivel} + ' x nível de segurança μ + σ = ' + ${p.nivelSegurancaFormatado}">
+                    <div class="preenchido" th:classappend="${p.riscoRuptura} ? 'alerta'"
+                         th:style="'width:' + ${p.larguraEstoque} + '%'"></div>
+                    <div class="marcador" th:style="'left:' + ${p.posicaoNivelSeguranca} + '%'"></div>
+                </div>
+                <p class="legenda-medidor">
+                    Estoque <b th:text="${p.estoqueDisponivel}">8</b> · μ + σ =
+                    <b th:text="${p.nivelSegurancaFormatado}">13,6</b>
+                </p>
+                <dl class="indicadores">
+                    <dt>Média (μ)</dt><dd th:text="${p.mediaFormatada}">12,0</dd>
+                    <dt>Desvio (σ)</dt><dd th:text="${p.desvioFormatado}">1,63</dd>
+                    <dt>Cobertura</dt><dd th:text="${p.coberturaDias} + ' dias'">20 dias</dd>
+                    <dt>Tendência</dt>
+                    <dd><span th:classappend="${'td-' + p.tendencia}" th:text="${p.simboloTendencia} + ' ' + ${p.tendencia}">▲ Alta</span></dd>
+                    <dt>Variabilidade</dt><dd th:text="${p.variabilidade} + ' (' + ${p.coeficienteVariacao} + '%)'">Moderada (14%)</dd>
+                    <dt>A captar</dt><dd th:text="${p.bolsasACaptar} + ' bolsas'">6 bolsas</dd>
+                </dl>
+            </div>
+            <p class="sub" th:unless="${p.historicoSuficiente}">
+                <span th:text="${p.situacao}">Histórico insuficiente para projeção (mínimo de 3 meses)</span>.
+                Consumo registrado em <span th:text="${p.mesesComConsumo}">1</span> de 3 meses;
+                estoque atual: <span th:text="${p.estoqueDisponivel}">0</span>.
+            </p>
+        </article>
+    </div>
+
+    <!-- Tabela detalhada (mesmos dados da historia) -->
+    <h2>Tabela detalhada</h2>
+    <div class="rolagem">
+        <table class="tabela-demanda">
+            <thead>
+            <tr>
+                <th>Tipo</th>
+                <th th:each="m : ${meses}" th:text="${#temporals.format(m.atDay(1), 'MM/yyyy')}"></th>
+                <th>Média (μ)</th><th>Desvio (σ)</th><th>μ + σ</th><th>Estoque</th><th>Projeção</th><th>Situação</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="p : ${projecoes}" th:classappend="${p.riscoRuptura} ? 'risco'">
+                <td><strong th:text="${p.tipo.rotulo}"></strong></td>
+                <td th:each="c : ${p.consumoMensal}" th:text="${c}"></td>
+                <td th:text="${p.historicoSuficiente} ? ${p.mediaFormatada} : '-'"></td>
+                <td th:text="${p.historicoSuficiente} ? ${p.desvioFormatado} : '-'"></td>
+                <td th:text="${p.historicoSuficiente} ? ${p.nivelSegurancaFormatado} : '-'"></td>
+                <td th:text="${p.estoqueDisponivel}"></td>
+                <td class="col-barra">
+                    <div class="barra" th:if="${p.historicoSuficiente}">
+                        <div th:classappend="${p.riscoRuptura} ? 'alerta'" th:style="'width:' + ${p.larguraBarra(maior)} + '%'"></div>
+                    </div>
+                </td>
+                <td class="quebra" th:text="${p.situacao}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+<script>
+    (function () {
+        var botoes = document.querySelectorAll('.filtro');
+        var cartoes = document.querySelectorAll('.cartao-tipo');
+        botoes.forEach(function (botao) {
+            botao.addEventListener('click', function () {
+                var filtro = botao.getAttribute('data-filtro');
+                botoes.forEach(function (b) { b.classList.toggle('ativo', b === botao); });
+                cartoes.forEach(function (c) {
+                    c.hidden = filtro !== 'todos' && c.getAttribute('data-categoria') !== filtro;
+                });
+            });
+        });
+    })();
+</script>
+</body>
+</html>
