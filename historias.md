@@ -1,6 +1,4 @@
-# 🩸 HemoTrack - Histórias de Usuário
-
-Este documento reúne as 11 histórias do HemoTrack. Cada história descreve a necessidade de negócio, as regras implementadas e os cenários de validação em BDD com dados concretos. Todas as mensagens entre aspas são exatamente as exibidas pelo sistema, e cada cenário possui um teste automatizado com o mesmo nome (`@DisplayName("Cenário N: ...")`) na classe indicada em **Testes automatizados**.
+  (`@DisplayName("Cenário N: ...")`) na classe indicada em **Testes automatizados**.
 
 <a id="indice"></a>
 
