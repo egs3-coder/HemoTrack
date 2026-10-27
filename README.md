@@ -26,6 +26,18 @@ compatibilidade sanguínea, distribuição e monitoramento de hemocomponentes.
 * *Screencast de Apresentação Código (YouTube):* [Assistir Demonstração no YouTube](https://youtu.be/3yQEfjwftGo)
 ---
 
+---
+
+### 🚀 Entrega 04 (09/11) POO
+
+
+* *Histórias de Usuário (.MD):* [Acessar Documento de Histórias de Usuário](https://github.com/egs3-coder/HemoTrack/blob/main/historias.md)
+* *Código (SRC):* [Acessar Código das Histórias Implementadas](https://github.com/egs3-coder/HemoTrack/tree/main/src)
+* *Screencast de Apresentação Visual (YouTube):* [Assistir Demonstração no YouTube](https://youtu.be/_C9ef-cF5FQ)
+* *Screencast de Apresentação Código (YouTube):* [Assistir Demonstração no YouTube](https://youtu.be/3yQEfjwftGo)
+---
+
+
 ## Issue/Bug Tracker
 
 [🐞 Issue/Bug Tracker](https://github.com/egs3-coder/HemoTrack/issues)
