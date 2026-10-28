@@ -11,7 +11,9 @@ import org.springframework.stereotype.Component;
  * O Spring executa este metodo em uma thread de agendamento, separada das threads
  * que atendem as requisicoes web.
  */
+
 @Component
+    
 public class RotinaValidade {
 
     private static final Logger LOG = LoggerFactory.getLogger(RotinaValidade.class);
