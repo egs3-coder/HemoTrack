@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: cabeca('Nova requisição')}"></head>
+<body>
+<header th:replace="~{fragments :: topo}"></header>
+<main class="conteudo">
+    <!-- US01 - Requisicao emergencial de hemocomponentes -->
+    <h1>Requisição de hemocomponentes</h1>
+    <form class="formulario" th:action="@{/requisicoes}" method="post">
+        <label>Hospital de destino
+            <select name="hospitalId">
+                <option value="">Selecione</option>
+                <option th:each="h : ${hospitais}" th:value="${h.id}" th:text="${h.nome}"
+                        th:selected="${hospitalId == h.id}"></option>
+            </select>
+        </label>
+        <label>Hemocomponente
+            <select name="hemocomponente">
+                <option value="">Selecione</option>
+                <option th:each="h : ${hemocomponentes}" th:value="${h}" th:text="${h.rotulo}"
+                        th:selected="${hemocomponente == h}"></option>
+            </select>
+        </label>
+        <label>Tipo sanguíneo do paciente
+            <select name="tipoSanguineo">
+                <option value="">Selecione</option>
+                <option th:each="t : ${tipos}" th:value="${t}" th:text="${t.rotulo}"
+                        th:selected="${tipoSanguineo == t}"></option>
+            </select>
+        </label>
+        <label>Quantidade de bolsas
+            <input type="number" name="quantidade" th:value="${quantidade}">
+            <span class="dica">De 1 a 10 bolsas</span>
+        </label>
+        <label>Nível de urgência
+            <select name="urgencia">
+                <option value="">Selecione</option>
+                <option th:each="u : ${urgencias}" th:value="${u}" th:text="${u.rotulo}"
+                        th:selected="${urgencia == u}"></option>
+            </select>
+        </label>
+        <button type="submit">Enviar requisição</button>
+    </form>
+    <p class="sub" th:if="${#lists.isEmpty(hospitais)}">
+        Não há hospitais ativos. <a th:href="@{/hospitais}">Cadastre um hospital</a> antes de solicitar.
+    </p>
+</main>
+</body>
+</html>
