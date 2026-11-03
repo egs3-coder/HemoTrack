@@ -19,17 +19,21 @@ public interface BolsaRepository extends JpaRepository<Bolsa, Long> {
     long countByStatusAndTipoSanguineo(StatusBolsa status, TipoSanguineo tipoSanguineo);
 
     /** Saldo utilizavel: bolsas "Disponivel" que ainda nao venceram (validade hoje ou depois). */
+    
     long countByStatusAndTipoSanguineoAndDataValidadeGreaterThanEqual(
             StatusBolsa status, TipoSanguineo tipoSanguineo, LocalDate hoje);
 
     /** Painel: bolsas disponiveis que vencem dentro de uma janela de dias (risco de descarte). */
+    
     long countByStatusAndDataValidadeBetween(StatusBolsa status, LocalDate inicio, LocalDate fim);
 
     /** US04: bolsas compativeis e nao vencidas, da validade mais proxima para a mais distante (FEFO). */
+    
     List<Bolsa> findByStatusAndHemocomponenteAndTipoSanguineoInAndDataValidadeGreaterThanEqualOrderByDataValidadeAsc(
             StatusBolsa status, Hemocomponente hemocomponente, Collection<TipoSanguineo> tipos, LocalDate hoje);
 
     /** US10: bolsas ainda no estoque cuja validade ja passou. */
+    
     List<Bolsa> findByStatusInAndDataValidadeBefore(Collection<StatusBolsa> status, LocalDate hoje);
 
     List<Bolsa> findByRequisicao(Requisicao requisicao);
@@ -41,5 +45,6 @@ public interface BolsaRepository extends JpaRepository<Bolsa, Long> {
     long countByDataDescarteBetween(LocalDate inicio, LocalDate fim);
 
     /** US07: apenas descartes por validade entram na taxa de descarte. */
+    
     long countByMotivoDescarteAndDataDescarteBetween(String motivoDescarte, LocalDate inicio, LocalDate fim);
 }
