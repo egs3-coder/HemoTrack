@@ -10,7 +10,6 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-
 import br.com.hemotrack.excecao.RegraNegocioException;
 import br.com.hemotrack.model.Perfil;
 import br.com.hemotrack.model.Usuario;
