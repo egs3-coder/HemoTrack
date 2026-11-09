@@ -47,14 +47,4 @@ public interface BolsaRepository extends JpaRepository<Bolsa, Long> {
     /** US07: apenas descartes por validade entram na taxa de descarte. */
     
     long countByMotivoDescarteAndDataDescarteBetween(String motivoDescarte, LocalDate inicio, LocalDate fim);
-
-    /** Filtro combinado de bolsas para a tela de estoque, respeitando a regra FEFO (validade mais próxima primeiro). */
-    @org.springframework.data.jpa.repository.Query("SELECT b FROM Bolsa b WHERE "
-            + "(:tipoSanguineo IS NULL OR b.tipoSanguineo = :tipoSanguineo) AND "
-            + "(:status IS NULL OR b.status = :status) AND "
-            + "(:hemocomponente IS NULL OR b.hemocomponente = :hemocomponente) "
-            + "ORDER BY b.dataValidade ASC")
-    List<Bolsa> filtrar(@org.springframework.data.repository.query.Param("tipoSanguineo") TipoSanguineo tipoSanguineo,
-                        @org.springframework.data.repository.query.Param("status") StatusBolsa status,
-                        @org.springframework.data.repository.query.Param("hemocomponente") Hemocomponente hemocomponente);
 }

@@ -39,32 +39,8 @@ public class RequisicaoController {
     }
 
     @GetMapping
-    public String listar(@RequestParam(required = false) String codigo,
-                         @RequestParam(required = false) Urgencia urgencia,
-                         @RequestParam(required = false) StatusRequisicao status,
-                         @RequestParam(required = false) TipoSanguineo tipoSanguineo,
-                         @RequestParam(required = false) Long hospitalId,
-                         Model model) {
-        String codigoLimpo = (codigo != null && !codigo.isBlank()) ? codigo.trim() : null;
-        model.addAttribute("requisicoes", requisicaoService.filtrar(codigoLimpo, urgencia, status, tipoSanguineo, hospitalId));
-        model.addAttribute("urgencias", Urgencia.values());
-        model.addAttribute("statusList", StatusRequisicao.values());
-        model.addAttribute("tipos", TipoSanguineo.values());
-        model.addAttribute("hospitais", hospitalService.listar());
-        model.addAttribute("codigoFiltro", codigoLimpo);
-        model.addAttribute("urgenciaFiltro", urgencia);
-        model.addAttribute("statusFiltro", status);
-        model.addAttribute("tipoSanguineoFiltro", tipoSanguineo);
-        model.addAttribute("hospitalIdFiltro", hospitalId);
-        if (hospitalId != null) {
-            try {
-                model.addAttribute("hospitalFiltro", hospitalService.buscar(hospitalId));
-            } catch (Exception e) {
-                // Se hospital não existir, não quebra
-            }
-        }
-        model.addAttribute("temFiltroAtivo", codigoLimpo != null || urgencia != null || status != null
-                || tipoSanguineo != null || hospitalId != null);
+    public String listar(Model model) {
+        model.addAttribute("requisicoes", requisicaoService.listar());
         return "requisicoes";
     }
 
@@ -111,16 +87,11 @@ public class RequisicaoController {
         model.addAttribute("urgencias", Urgencia.values());
     }
 
-    /**
-     * Consulta de pedido por identificador: redireciona para a listagem filtrada,
-     * permitindo visualizar o resultado na tabela sem abrir diretamente os detalhes.
-     */
+    /** US11 cenarios 1 e 4: consulta pelo identificador. */
     @GetMapping("/consulta")
     public String consultar(@RequestParam(required = false) String codigo) {
-        if (codigo != null && !codigo.isBlank()) {
-            return "redirect:/requisicoes?codigo=" + java.net.URLEncoder.encode(codigo.trim(), java.nio.charset.StandardCharsets.UTF_8);
-        }
-        return "redirect:/requisicoes";
+        Requisicao requisicao = requisicaoService.buscarPorCodigo(codigo);
+        return "redirect:/requisicoes/" + requisicao.getId();
     }
 
     @GetMapping("/{id}")

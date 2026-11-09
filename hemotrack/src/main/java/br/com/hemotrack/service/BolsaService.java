@@ -41,18 +41,6 @@ public class BolsaService {
     }
 
     /**
-     * Lista bolsas aplicando filtros combinados por tipo sanguíneo, status e hemocomponente.
-     * Mantém rigorosamente a regra FEFO (ordem por data de validade ascendente).
-     * Se nenhum filtro for informado, retorna a listagem completa padrão.
-     */
-    public List<Bolsa> filtrar(TipoSanguineo tipoSanguineo, StatusBolsa status, Hemocomponente hemocomponente) {
-        if (tipoSanguineo == null && status == null && hemocomponente == null) {
-            return listar();
-        }
-        return bolsaRepository.filtrar(tipoSanguineo, status, hemocomponente);
-    }
-
-    /**
      * Saldo de bolsas disponiveis por tipo sanguineo (painel - US03 cenario 1).
      * Uma bolsa ja vencida, mesmo antes da verificacao da US10, nao conta como disponivel para uso.
      */

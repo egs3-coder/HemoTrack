@@ -40,64 +40,9 @@
     </form>
 
     <h2>Inventário</h2>
-    <div class="linha-inventario-topo">
-        <form th:action="@{/bolsas/verificar-validade}" method="post">
-            <button type="submit" class="secundario">Verificar validade agora</button>
-        </form>
-    </div>
-
-    <!-- Filtros de Estoque -->
-    <section class="secao-filtros">
-        <form th:action="@{/bolsas}" method="get" class="formulario-filtros">
-            <label>Tipo ABO/Rh
-                <select name="tipoSanguineo">
-                    <option value="">Todos os tipos</option>
-                    <option th:each="t : ${tipos}" th:value="${t}" th:text="${t.rotulo}"
-                            th:selected="${t == tipoSanguineoFiltro}"></option>
-                </select>
-            </label>
-            <label>Status
-                <select name="status">
-                    <option value="">Todos os status</option>
-                    <option th:each="s : ${statusList}" th:value="${s}" th:text="${s.rotulo}"
-                            th:selected="${s == statusFiltro}"></option>
-                </select>
-            </label>
-            <label>Hemocomponente
-                <select name="hemocomponente">
-                    <option value="">Todos os hemocomponentes</option>
-                    <option th:each="h : ${hemocomponentes}" th:value="${h}" th:text="${h.rotulo}"
-                            th:selected="${h == hemocomponenteFiltro}"></option>
-                </select>
-            </label>
-            <div class="acoes-filtros">
-                <button type="submit">Filtrar</button>
-                <a th:if="${temFiltroAtivo}" th:href="@{/bolsas}" class="botao secundario" id="btn-limpar-filtros">Limpar filtros</a>
-            </div>
-        </form>
-
-        <!-- Chips de remoção individual de filtros ativos -->
-        <div class="filtros-ativos" th:if="${temFiltroAtivo}">
-            <span class="legenda-filtros">Filtros ativos:</span>
-            <span class="chip-filtro" th:if="${tipoSanguineoFiltro != null}">
-                Tipo: <strong th:text="${tipoSanguineoFiltro.rotulo}"></strong>
-                <a th:href="@{/bolsas(status=${statusFiltro}, hemocomponente=${hemocomponenteFiltro})}"
-                   class="remover-filtro" title="Remover filtro de tipo sanguíneo" aria-label="Remover filtro de tipo sanguíneo">&times;</a>
-            </span>
-            <span class="chip-filtro" th:if="${statusFiltro != null}">
-                Status: <strong th:text="${statusFiltro.rotulo}"></strong>
-                <a th:href="@{/bolsas(tipoSanguineo=${tipoSanguineoFiltro}, hemocomponente=${hemocomponenteFiltro})}"
-                   class="remover-filtro" title="Remover filtro de status" aria-label="Remover filtro de status">&times;</a>
-            </span>
-            <span class="chip-filtro" th:if="${hemocomponenteFiltro != null}">
-                Hemocomponente: <strong th:text="${hemocomponenteFiltro.rotulo}"></strong>
-                <a th:href="@{/bolsas(tipoSanguineo=${tipoSanguineoFiltro}, status=${statusFiltro})}"
-                   class="remover-filtro" title="Remover filtro de hemocomponente" aria-label="Remover filtro de hemocomponente">&times;</a>
-            </span>
-            <a th:href="@{/bolsas}" class="link-remover-todos">Remover todos os filtros</a>
-        </div>
-    </section>
-
+    <form th:action="@{/bolsas/verificar-validade}" method="post">
+        <button type="submit" class="secundario">Verificar validade agora</button>
+    </form>
     <div class="rolagem">
         <table>
             <thead>
@@ -122,7 +67,7 @@
                 </td>
                 <td th:text="${b.motivoDescarte != null ? b.motivoDescarte + ' em ' + #temporals.format(b.dataDescarte, 'dd/MM/yyyy') : '-'}"></td>
             </tr>
-            <tr th:if="${#lists.isEmpty(bolsas)}"><td colspan="8" th:text="${temFiltroAtivo} ? 'Nenhuma bolsa encontrada para os filtros selecionados.' : 'Nenhuma bolsa cadastrada.'">Nenhuma bolsa cadastrada.</td></tr>
+            <tr th:if="${#lists.isEmpty(bolsas)}"><td colspan="8">Nenhuma bolsa cadastrada.</td></tr>
             </tbody>
         </table>
     </div>

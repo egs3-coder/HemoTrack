@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: cabeca('Malha de rotas')}"></head>
+<body>
+<header th:replace="~{fragments :: topo}"></header>
+<main class="conteudo">
+    <h1>Malha de rotas</h1>
+    <p class="sub">Trechos entre o hemocentro e os hospitais. Cada trecho vale nos dois sentidos.</p>
+
+    <h2>Novo trecho</h2>
+    <form class="formulario" th:action="@{/trechos}" method="post">
+        <label>Origem
+            <select name="origem">
+                <option th:value="${hemocentro}" th:text="${hemocentro}"></option>
+                <option th:each="h : ${hospitais}" th:value="${h.nome}" th:text="${h.nome}"></option>
+            </select>
+        </label>
+        <label>Destino
+            <select name="destino">
+                <option th:each="h : ${hospitais}" th:value="${h.nome}" th:text="${h.nome}"></option>
+                <option th:value="${hemocentro}" th:text="${hemocentro}"></option>
+            </select>
+        </label>
+        <label>Tempo (min)
+            <input type="number" name="tempoMin" min="1">
+        </label>
+        <label>Distância (km)
+            <input type="number" name="distanciaKm" step="0.1" min="0.1">
+        </label>
+        <button type="submit">Cadastrar trecho</button>
+    </form>
+
+    <h2>Trechos cadastrados</h2>
+    <div class="rolagem">
+        <table>
+            <thead><tr><th>Origem</th><th>Destino</th><th>Tempo (min)</th><th>Distância (km)</th><th></th></tr></thead>
+            <tbody>
+            <tr th:each="t : ${trechos}">
+                <td th:text="${t.origem}"></td>
+                <td th:text="${t.destino}"></td>
+                <td th:text="${t.tempoMin}"></td>
+                <td th:text="${#numbers.formatDecimal(t.distanciaKm, 1, 1)}"></td>
+                <td>
+                    <form th:action="@{/trechos/{id}/remover(id=${t.id})}" method="post">
+                        <button type="submit" class="secundario pequeno">Remover</button>
+                    </form>
+                </td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(trechos)}"><td colspan="5">Nenhum trecho cadastrado.</td></tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+</body>
+</html>

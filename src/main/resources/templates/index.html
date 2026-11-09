@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: cabeca('Início')}"></head>
+<body>
+<header th:replace="~{fragments :: topo}"></header>
+<main class="conteudo">
+    <h1>Painel do hemocentro</h1>
+
+    <!-- US03: saldo de bolsas disponiveis por tipo -->
+    <p class="sub">Saldo de bolsas disponíveis por tipo sanguíneo</p>
+    <div class="cartoes">
+        <div class="cartao saldo" th:each="item : ${saldo}" th:classappend="${item.value == 0} ? 'zerado'">
+            <span class="rotulo" th:text="${item.key.rotulo}">O-</span>
+            <strong th:text="${item.value}">0</strong>
+            <span class="rotulo">bolsas</span>
+        </div>
+    </div>
+
+    <h2>Situação da operação</h2>
+    <div class="operacao">
+        <a class="op-card" th:href="@{/requisicoes}">
+            <span class="op-titulo">Pendentes de alocação</span>
+            <span class="op-numero" th:text="${pendentes}">0</span>
+            <span class="op-descricao">requisições aguardando bolsas</span>
+        </a>
+        <a class="op-card" th:href="@{/requisicoes}">
+            <span class="op-titulo">Alocadas</span>
+            <span class="op-numero" th:text="${alocadas}">0</span>
+            <span class="op-descricao">aguardando rota e despacho</span>
+        </a>
+        <a class="op-card" th:href="@{/requisicoes}">
+            <span class="op-titulo">Em transporte</span>
+            <span class="op-numero" th:text="${emTransporte}">0</span>
+            <span class="op-descricao">com temperatura monitorada</span>
+        </a>
+        <a class="op-card" th:href="@{/bolsas}" th:classappend="${vencendo > 0} ? 'op-atencao'">
+            <span class="op-titulo" th:text="'Vencem em até ' + ${diasAlerta} + ' dias'">Vencem em até 3 dias</span>
+            <span class="op-numero" th:text="${vencendo}">0</span>
+            <span class="op-descricao">bolsas para priorizar na alocação</span>
+        </a>
+    </div>
+
+    <div class="aviso erro" th:unless="${#lists.isEmpty(emRisco)}">
+        <strong>Risco de ruptura:</strong>
+        <th:block th:each="p, i : ${emRisco}"><span th:text="${p.tipo.rotulo} + ' (captar ' + ${p.bolsasACaptar} + ' bolsas)'">O- (captar 6 bolsas)</span><span th:unless="${i.last}">, </span></th:block>.
+        <a th:href="@{/demanda}">Ver demanda preditiva</a>
+    </div>
+
+    <!-- US11: consulta pelo identificador -->
+    <h2>Consultar pedido</h2>
+    <form class="linha" th:action="@{/requisicoes/consulta}" method="get">
+        <input type="text" name="codigo" placeholder="REQ-0001" aria-label="Identificador do pedido" required>
+        <button type="submit">Consultar</button>
+    </form>
+
+    <h2>Atalhos</h2>
+    <p class="linha">
+        <a class="botao" th:href="@{/requisicoes/nova}">Nova requisição</a>
+        <a class="botao secundario" th:href="@{/bolsas}">Entrada de estoque</a>
+        <a class="botao secundario" th:href="@{/dashboard(dias=30)}">Dashboard operacional</a>
+        <a class="botao secundario" th:href="@{/demanda}">Demanda preditiva</a>
+    </p>
+</main>
+</body>
+</html>

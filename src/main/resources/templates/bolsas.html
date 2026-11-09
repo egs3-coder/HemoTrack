@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: cabeca('Estoque')}"></head>
+<body>
+<header th:replace="~{fragments :: topo}"></header>
+<main class="conteudo">
+    <h1>Estoque de bolsas</h1>
+
+    <div class="cartoes">
+        <div class="cartao" th:each="item : ${saldo}">
+            <span class="rotulo" th:text="${item.key.rotulo}">O-</span>
+            <strong th:text="${item.value}">0</strong>
+        </div>
+    </div>
+
+    <h2>Entrada de bolsa</h2>
+    <form class="formulario" th:action="@{/bolsas}" method="post">
+        <label>Código
+            <input type="text" name="codigo" placeholder="BOL-9821">
+        </label>
+        <label>Hemocomponente
+            <select name="hemocomponente">
+                <option value="">Selecione</option>
+                <option th:each="h : ${hemocomponentes}" th:value="${h}" th:text="${h.rotulo}"></option>
+            </select>
+        </label>
+        <label>Tipo ABO/Rh
+            <select name="tipoSanguineo">
+                <option value="">Selecione</option>
+                <option th:each="t : ${tipos}" th:value="${t}" th:text="${t.rotulo}"></option>
+            </select>
+        </label>
+        <label>Data de coleta
+            <input type="date" name="dataColeta">
+        </label>
+        <label>Data de validade
+            <input type="date" name="dataValidade">
+        </label>
+        <button type="submit">Cadastrar bolsa</button>
+    </form>
+
+    <h2>Inventário</h2>
+    <form th:action="@{/bolsas/verificar-validade}" method="post">
+        <button type="submit" class="secundario">Verificar validade agora</button>
+    </form>
+    <div class="rolagem">
+        <table>
+            <thead>
+            <tr>
+                <th>Código</th><th>Hemocomponente</th><th>Tipo</th><th>Coleta</th><th>Validade</th>
+                <th>Status</th><th>Pedido</th><th>Descarte</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="b : ${bolsas}">
+                <td th:text="${b.codigo}"></td>
+                <td th:text="${b.hemocomponente.rotulo}"></td>
+                <td th:text="${b.tipoSanguineo.rotulo}"></td>
+                <td th:text="${b.dataColeta != null ? #temporals.format(b.dataColeta, 'dd/MM/yyyy') : '-'}"></td>
+                <td th:text="${#temporals.format(b.dataValidade, 'dd/MM/yyyy')}"
+                    th:classappend="${b.estaVencida(hoje)} ? 'vencida'"></td>
+                <td><span class="etiqueta" th:classappend="${'st-' + b.status.name()}" th:text="${b.status.rotulo}"></span></td>
+                <td>
+                    <a th:if="${b.requisicao != null}" th:href="@{/requisicoes/{id}(id=${b.requisicao.id})}"
+                       th:text="${b.requisicao.codigo}"></a>
+                    <span th:if="${b.requisicao == null}">-</span>
+                </td>
+                <td th:text="${b.motivoDescarte != null ? b.motivoDescarte + ' em ' + #temporals.format(b.dataDescarte, 'dd/MM/yyyy') : '-'}"></td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(bolsas)}"><td colspan="8">Nenhuma bolsa cadastrada.</td></tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+</body>
+</html>

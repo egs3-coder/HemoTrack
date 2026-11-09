@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: cabeca('Entrar')}"></head>
+<body>
+<!-- US02 - cenarios 5, 6 e 7: tela de entrada -->
+<main class="conteudo login">
+    <h1>HemoTrack</h1>
+    <p class="sub">Entre para acessar a plataforma.</p>
+    <p class="aviso sucesso" th:if="${sucesso}" th:text="${sucesso}"></p>
+    <p class="aviso erro" th:if="${erro}" th:text="${erro}" role="alert"></p>
+    <form class="formulario" th:action="@{/login}" method="post">
+        <label>Usuário
+            <input type="text" name="login" th:value="${login}" autocomplete="username"
+                   th:autofocus="${login == null}" required>
+        </label>
+        <label>Senha
+            <input type="password" name="senha" autocomplete="current-password"
+                   th:autofocus="${login != null}" required>
+        </label>
+        <button type="submit">Entrar</button>
+        <a class="link-discreto" th:href="@{/recuperar-senha}">Esqueci minha senha</a>
+    </form>
+    <p class="sub rodape">Ainda não tem conta? <a th:href="@{/cadastro}">Criar conta</a></p>
+</main>
+</body>
+</html>

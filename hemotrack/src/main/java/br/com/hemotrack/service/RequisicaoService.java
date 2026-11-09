@@ -50,25 +50,7 @@ public class RequisicaoService {
     }
 
     public List<Requisicao> listar() {
-        return requisicaoRepository.findAllByOrderByPrioridadeUrgencia();
-    }
-
-    /**
-     * Lista requisições aplicando filtros combinados por código, urgência, status, tipo sanguíneo e hospital.
-     * Ordena por prioridade de urgência (Emergência > Urgente > Rotina) e data de criação decrescente.
-     * Se nenhum critério for fornecido, retorna a listagem original completa.
-     */
-    public List<Requisicao> filtrar(String codigo, Urgencia urgencia, StatusRequisicao status,
-                                    TipoSanguineo tipoSanguineo, Long hospitalId) {
-        String codigoLimpo = (codigo != null && !codigo.isBlank()) ? codigo.trim() : null;
-        if (codigoLimpo == null && urgencia == null && status == null && tipoSanguineo == null && hospitalId == null) {
-            return listar();
-        }
-        return requisicaoRepository.filtrar(codigoLimpo, urgencia, status, tipoSanguineo, hospitalId);
-    }
-
-    public List<Requisicao> filtrar(String codigo, Urgencia urgencia, StatusRequisicao status) {
-        return filtrar(codigo, urgencia, status, null, null);
+        return requisicaoRepository.findAllByOrderByDataCriacaoDesc();
     }
 
     public Requisicao buscar(Long id) {
