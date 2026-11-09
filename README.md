@@ -34,7 +34,7 @@ compatibilidade sanguínea, distribuição e monitoramento de hemocomponentes.
 * *Histórias de Usuário (.MD):* [Acessar Documento de Histórias de Usuário](https://github.com/egs3-coder/HemoTrack/blob/main/historias.md)
 * *Código:* [Acessar Código das Histórias Implementadas](https://github.com/egs3-coder/HemoTrack/tree/main/hemotrack)
 * *Screencast de Apresentação Visual (YouTube):* [Assistir Demonstração no YouTube](https://youtu.be/rHVz3nn59Ak)
-* *Screencast de Apresentação Código (YouTube):* [Assistir Demonstração no YouTube](https://youtu.be/3yQEfjwftGo)
+* *Screencast de Apresentação Código (YouTube):* [Assistir Demonstração no YouTube](https://youtu.be/xPw9zpeyeyQ)
 ---
 
 
