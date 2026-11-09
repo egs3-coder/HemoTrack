@@ -50,7 +50,20 @@ public class RequisicaoService {
     }
 
     public List<Requisicao> listar() {
-        return requisicaoRepository.findAllByOrderByDataCriacaoDesc();
+        return requisicaoRepository.findAllByOrderByPrioridadeUrgencia();
+    }
+
+    /**
+     * Lista requisições aplicando filtros combinados por código, urgência e status.
+     * Ordena por prioridade de urgência (Emergência > Urgente > Rotina) e data de criação decrescente.
+     * Se nenhum critério for fornecido, retorna a listagem original completa.
+     */
+    public List<Requisicao> filtrar(String codigo, Urgencia urgencia, StatusRequisicao status) {
+        String codigoLimpo = (codigo != null && !codigo.isBlank()) ? codigo.trim() : null;
+        if (codigoLimpo == null && urgencia == null && status == null) {
+            return listar();
+        }
+        return requisicaoRepository.filtrar(codigoLimpo, urgencia, status);
     }
 
     public Requisicao buscar(Long id) {

@@ -39,8 +39,18 @@ public class RequisicaoController {
     }
 
     @GetMapping
-    public String listar(Model model) {
-        model.addAttribute("requisicoes", requisicaoService.listar());
+    public String listar(@RequestParam(required = false) String codigo,
+                         @RequestParam(required = false) Urgencia urgencia,
+                         @RequestParam(required = false) StatusRequisicao status,
+                         Model model) {
+        String codigoLimpo = (codigo != null && !codigo.isBlank()) ? codigo.trim() : null;
+        model.addAttribute("requisicoes", requisicaoService.filtrar(codigoLimpo, urgencia, status));
+        model.addAttribute("urgencias", Urgencia.values());
+        model.addAttribute("statusList", StatusRequisicao.values());
+        model.addAttribute("codigoFiltro", codigoLimpo);
+        model.addAttribute("urgenciaFiltro", urgencia);
+        model.addAttribute("statusFiltro", status);
+        model.addAttribute("temFiltroAtivo", codigoLimpo != null || urgencia != null || status != null);
         return "requisicoes";
     }
 
@@ -87,11 +97,16 @@ public class RequisicaoController {
         model.addAttribute("urgencias", Urgencia.values());
     }
 
-    /** US11 cenarios 1 e 4: consulta pelo identificador. */
+    /**
+     * Consulta de pedido por identificador: redireciona para a listagem filtrada,
+     * permitindo visualizar o resultado na tabela sem abrir diretamente os detalhes.
+     */
     @GetMapping("/consulta")
     public String consultar(@RequestParam(required = false) String codigo) {
-        Requisicao requisicao = requisicaoService.buscarPorCodigo(codigo);
-        return "redirect:/requisicoes/" + requisicao.getId();
+        if (codigo != null && !codigo.isBlank()) {
+            return "redirect:/requisicoes?codigo=" + java.net.URLEncoder.encode(codigo.trim(), java.nio.charset.StandardCharsets.UTF_8);
+        }
+        return "redirect:/requisicoes";
     }
 
     @GetMapping("/{id}")
