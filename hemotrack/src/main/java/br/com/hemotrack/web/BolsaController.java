@@ -2,6 +2,7 @@ package br.com.hemotrack.web;
 
 import br.com.hemotrack.model.Bolsa;
 import br.com.hemotrack.model.Hemocomponente;
+import br.com.hemotrack.model.StatusBolsa;
 import br.com.hemotrack.model.TipoSanguineo;
 import br.com.hemotrack.service.BolsaService;
 import java.time.LocalDate;
@@ -26,12 +27,20 @@ public class BolsaController {
     }
 
     @GetMapping
-    public String listar(Model model) {
-        model.addAttribute("bolsas", bolsaService.listar());
+    public String listar(@RequestParam(required = false) TipoSanguineo tipoSanguineo,
+                         @RequestParam(required = false) StatusBolsa status,
+                         @RequestParam(required = false) Hemocomponente hemocomponente,
+                         Model model) {
+        model.addAttribute("bolsas", bolsaService.filtrar(tipoSanguineo, status, hemocomponente));
         model.addAttribute("saldo", bolsaService.saldoPorTipo());
         model.addAttribute("hemocomponentes", Hemocomponente.values());
         model.addAttribute("tipos", TipoSanguineo.values());
+        model.addAttribute("statusList", StatusBolsa.values());
         model.addAttribute("hoje", LocalDate.now());
+        model.addAttribute("tipoSanguineoFiltro", tipoSanguineo);
+        model.addAttribute("statusFiltro", status);
+        model.addAttribute("hemocomponenteFiltro", hemocomponente);
+        model.addAttribute("temFiltroAtivo", tipoSanguineo != null || status != null || hemocomponente != null);
         return "bolsas";
     }
 
