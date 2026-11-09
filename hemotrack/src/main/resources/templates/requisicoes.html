@@ -29,6 +29,20 @@
                             th:selected="${s == statusFiltro}"></option>
                 </select>
             </label>
+            <label>Tipo ABO/Rh
+                <select name="tipoSanguineo">
+                    <option value="">Todos os tipos</option>
+                    <option th:each="t : ${tipos}" th:value="${t}" th:text="${t.rotulo}"
+                            th:selected="${t == tipoSanguineoFiltro}"></option>
+                </select>
+            </label>
+            <label>Hospital
+                <select name="hospitalId">
+                    <option value="">Todos os hospitais</option>
+                    <option th:each="h : ${hospitais}" th:value="${h.id}" th:text="${h.nome}"
+                            th:selected="${h.id == hospitalIdFiltro}"></option>
+                </select>
+            </label>
             <div class="acoes-filtros">
                 <button type="submit">Filtrar</button>
                 <a th:if="${temFiltroAtivo}" th:href="@{/requisicoes}" class="botao secundario" id="btn-limpar-filtros">Limpar filtros</a>
@@ -40,18 +54,28 @@
             <span class="legenda-filtros">Filtros ativos:</span>
             <span class="chip-filtro" th:if="${codigoFiltro != null}">
                 Código: <strong th:text="${codigoFiltro}"></strong>
-                <a th:href="@{/requisicoes(urgencia=${urgenciaFiltro}, status=${statusFiltro})}"
+                <a th:href="@{/requisicoes(urgencia=${urgenciaFiltro}, status=${statusFiltro}, tipoSanguineo=${tipoSanguineoFiltro}, hospitalId=${hospitalIdFiltro})}"
                    class="remover-filtro" title="Remover filtro de código" aria-label="Remover filtro de código">&times;</a>
             </span>
             <span class="chip-filtro" th:if="${urgenciaFiltro != null}">
                 Urgência: <strong th:text="${urgenciaFiltro.rotulo}"></strong>
-                <a th:href="@{/requisicoes(codigo=${codigoFiltro}, status=${statusFiltro})}"
+                <a th:href="@{/requisicoes(codigo=${codigoFiltro}, status=${statusFiltro}, tipoSanguineo=${tipoSanguineoFiltro}, hospitalId=${hospitalIdFiltro})}"
                    class="remover-filtro" title="Remover filtro de urgência" aria-label="Remover filtro de urgência">&times;</a>
             </span>
             <span class="chip-filtro" th:if="${statusFiltro != null}">
                 Status: <strong th:text="${statusFiltro.rotulo}"></strong>
-                <a th:href="@{/requisicoes(codigo=${codigoFiltro}, urgencia=${urgenciaFiltro})}"
+                <a th:href="@{/requisicoes(codigo=${codigoFiltro}, urgencia=${urgenciaFiltro}, tipoSanguineo=${tipoSanguineoFiltro}, hospitalId=${hospitalIdFiltro})}"
                    class="remover-filtro" title="Remover filtro de status" aria-label="Remover filtro de status">&times;</a>
+            </span>
+            <span class="chip-filtro" th:if="${tipoSanguineoFiltro != null}">
+                Tipo: <strong th:text="${tipoSanguineoFiltro.rotulo}"></strong>
+                <a th:href="@{/requisicoes(codigo=${codigoFiltro}, urgencia=${urgenciaFiltro}, status=${statusFiltro}, hospitalId=${hospitalIdFiltro})}"
+                   class="remover-filtro" title="Remover filtro de tipo sanguíneo" aria-label="Remover filtro de tipo sanguíneo">&times;</a>
+            </span>
+            <span class="chip-filtro" th:if="${hospitalFiltro != null}">
+                Hospital: <strong th:text="${hospitalFiltro.nome}"></strong>
+                <a th:href="@{/requisicoes(codigo=${codigoFiltro}, urgencia=${urgenciaFiltro}, status=${statusFiltro}, tipoSanguineo=${tipoSanguineoFiltro})}"
+                   class="remover-filtro" title="Remover filtro de hospital" aria-label="Remover filtro de hospital">&times;</a>
             </span>
             <a th:href="@{/requisicoes}" class="link-remover-todos">Remover todos os filtros</a>
         </div>

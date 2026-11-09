@@ -42,15 +42,29 @@ public class RequisicaoController {
     public String listar(@RequestParam(required = false) String codigo,
                          @RequestParam(required = false) Urgencia urgencia,
                          @RequestParam(required = false) StatusRequisicao status,
+                         @RequestParam(required = false) TipoSanguineo tipoSanguineo,
+                         @RequestParam(required = false) Long hospitalId,
                          Model model) {
         String codigoLimpo = (codigo != null && !codigo.isBlank()) ? codigo.trim() : null;
-        model.addAttribute("requisicoes", requisicaoService.filtrar(codigoLimpo, urgencia, status));
+        model.addAttribute("requisicoes", requisicaoService.filtrar(codigoLimpo, urgencia, status, tipoSanguineo, hospitalId));
         model.addAttribute("urgencias", Urgencia.values());
         model.addAttribute("statusList", StatusRequisicao.values());
+        model.addAttribute("tipos", TipoSanguineo.values());
+        model.addAttribute("hospitais", hospitalService.listar());
         model.addAttribute("codigoFiltro", codigoLimpo);
         model.addAttribute("urgenciaFiltro", urgencia);
         model.addAttribute("statusFiltro", status);
-        model.addAttribute("temFiltroAtivo", codigoLimpo != null || urgencia != null || status != null);
+        model.addAttribute("tipoSanguineoFiltro", tipoSanguineo);
+        model.addAttribute("hospitalIdFiltro", hospitalId);
+        if (hospitalId != null) {
+            try {
+                model.addAttribute("hospitalFiltro", hospitalService.buscar(hospitalId));
+            } catch (Exception e) {
+                // Se hospital não existir, não quebra
+            }
+        }
+        model.addAttribute("temFiltroAtivo", codigoLimpo != null || urgencia != null || status != null
+                || tipoSanguineo != null || hospitalId != null);
         return "requisicoes";
     }
 

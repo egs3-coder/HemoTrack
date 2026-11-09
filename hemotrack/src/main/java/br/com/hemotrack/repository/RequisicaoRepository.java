@@ -36,13 +36,16 @@ public interface RequisicaoRepository extends JpaRepository<Requisicao, Long> {
     List<Requisicao> findByStatusAndDataEntregaBetween(StatusRequisicao status, LocalDateTime inicio, LocalDateTime fim);
 
     /**
-     * Filtro combinado de requisições por identificador (código), urgência e status.
+     * Filtro combinado de requisições por identificador (código), urgência, status,
+     * tipo sanguíneo e hospital.
      * Ordena por prioridade de urgência (Emergência > Urgente > Rotina) e data de criação decrescente.
      */
     @Query("SELECT r FROM Requisicao r WHERE "
             + "(:codigo IS NULL OR UPPER(TRIM(r.codigo)) LIKE UPPER(CONCAT('%', TRIM(:codigo), '%'))) AND "
             + "(:urgencia IS NULL OR r.urgencia = :urgencia) AND "
-            + "(:status IS NULL OR r.status = :status) "
+            + "(:status IS NULL OR r.status = :status) AND "
+            + "(:tipoSanguineo IS NULL OR r.tipoSanguineo = :tipoSanguineo) AND "
+            + "(:hospitalId IS NULL OR r.hospital.id = :hospitalId) "
             + "ORDER BY CASE r.urgencia "
             + "  WHEN br.com.hemotrack.model.Urgencia.EMERGENCIA THEN 1 "
             + "  WHEN br.com.hemotrack.model.Urgencia.URGENTE THEN 2 "
@@ -50,5 +53,7 @@ public interface RequisicaoRepository extends JpaRepository<Requisicao, Long> {
             + "  ELSE 4 END ASC, r.dataCriacao DESC")
     List<Requisicao> filtrar(@Param("codigo") String codigo,
                              @Param("urgencia") Urgencia urgencia,
-                             @Param("status") StatusRequisicao status);
+                             @Param("status") StatusRequisicao status,
+                             @Param("tipoSanguineo") br.com.hemotrack.model.TipoSanguineo tipoSanguineo,
+                             @Param("hospitalId") Long hospitalId);
 }

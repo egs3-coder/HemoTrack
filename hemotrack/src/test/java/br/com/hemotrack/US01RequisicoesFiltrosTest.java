@@ -75,7 +75,11 @@ class US01RequisicoesFiltrosTest {
     }
 
     private Requisicao criarRequisicao(String codigo, Urgencia urgencia, StatusRequisicao status) {
-        Requisicao req = new Requisicao(hospital, Hemocomponente.CONCENTRADO_HEMACIAS, TipoSanguineo.O_POS, 2, urgencia);
+        return criarRequisicao(codigo, hospital, TipoSanguineo.O_POS, urgencia, status);
+    }
+
+    private Requisicao criarRequisicao(String codigo, Hospital h, TipoSanguineo tipo, Urgencia urgencia, StatusRequisicao status) {
+        Requisicao req = new Requisicao(h, Hemocomponente.CONCENTRADO_HEMACIAS, tipo, 2, urgencia);
         req.atribuirCodigo(Long.parseLong(codigo.replace("REQ-", "")));
         if (status == StatusRequisicao.ALOCADA) {
             req.marcarAlocada();
@@ -144,6 +148,42 @@ class US01RequisicoesFiltrosTest {
     }
 
     @Test
+    @DisplayName("Filtro individual por Tipo Sanguíneo")
+    void filtrarPorTipoSanguineo() {
+        criarRequisicao("REQ-0035", hospital, TipoSanguineo.A_POS, Urgencia.URGENTE, StatusRequisicao.PENDENTE);
+        criarRequisicao("REQ-0036", hospital, TipoSanguineo.O_NEG, Urgencia.URGENTE, StatusRequisicao.PENDENTE);
+
+        List<Requisicao> resultado = requisicaoService.filtrar(null, null, null, TipoSanguineo.A_POS, null);
+        assertEquals(1, resultado.size());
+        assertEquals("REQ-0035", resultado.get(0).getCodigo());
+    }
+
+    @Test
+    @DisplayName("Filtro individual por Hospital")
+    void filtrarPorHospital() {
+        Hospital outroHospital = hospitalRepository.save(new Hospital("Hospital Boa Vista", "98765432000110", "Sul"));
+        criarRequisicao("REQ-0037", hospital, TipoSanguineo.O_POS, Urgencia.URGENTE, StatusRequisicao.PENDENTE);
+        criarRequisicao("REQ-0038", outroHospital, TipoSanguineo.O_POS, Urgencia.URGENTE, StatusRequisicao.PENDENTE);
+
+        List<Requisicao> resultado = requisicaoService.filtrar(null, null, null, null, outroHospital.getId());
+        assertEquals(1, resultado.size());
+        assertEquals("REQ-0038", resultado.get(0).getCodigo());
+    }
+
+    @Test
+    @DisplayName("Filtro combinado completo com 5 critérios (Código, Urgência, Status, Tipo e Hospital)")
+    void filtroCombinadoCompleto() {
+        Hospital outroHospital = hospitalRepository.save(new Hospital("Hospital Boa Vista", "98765432000110", "Sul"));
+        criarRequisicao("REQ-0039", hospital, TipoSanguineo.AB_NEG, Urgencia.EMERGENCIA, StatusRequisicao.PENDENTE);
+        criarRequisicao("REQ-0040", outroHospital, TipoSanguineo.AB_NEG, Urgencia.EMERGENCIA, StatusRequisicao.PENDENTE);
+
+        List<Requisicao> resultado = requisicaoService.filtrar("0039", Urgencia.EMERGENCIA, StatusRequisicao.PENDENTE,
+                TipoSanguineo.AB_NEG, hospital.getId());
+        assertEquals(1, resultado.size());
+        assertEquals("REQ-0039", resultado.get(0).getCodigo());
+    }
+
+    @Test
     @DisplayName("Pesquisa de requisição existente não abre detalhes automaticamente e a exibe na listagem")
     void pesquisaNaoAbreAutomaticamenteEDetalhaApenasAoClicar() throws Exception {
         Requisicao req = criarRequisicao("REQ-0040", Urgencia.EMERGENCIA, StatusRequisicao.PENDENTE);
@@ -189,18 +229,23 @@ class US01RequisicoesFiltrosTest {
         criarRequisicao("REQ-0060", Urgencia.EMERGENCIA, StatusRequisicao.PENDENTE);
         criarRequisicao("REQ-0061", Urgencia.ROTINA, StatusRequisicao.ALOCADA);
 
-        // Com filtros ativos: codigo + urgencia
+        // Com filtros ativos: codigo + urgencia + tipoSanguineo + hospitalId
         mvc.perform(get("/requisicoes")
                         .session(sessaoAutenticada)
                         .param("codigo", "REQ-0060")
-                        .param("urgencia", "EMERGENCIA"))
+                        .param("urgencia", "EMERGENCIA")
+                        .param("tipoSanguineo", "O_POS")
+                        .param("hospitalId", hospital.getId().toString()))
                 .andExpect(status().isOk())
                 .andExpect(model().attribute("temFiltroAtivo", true))
                 .andExpect(content().string(containsString("Filtros ativos:")))
                 .andExpect(content().string(containsString("Código: <strong>REQ-0060</strong>")))
                 .andExpect(content().string(containsString("Urgência: <strong>Emergência</strong>")))
-                // Remoção individual da urgência mantém o código na URL
+                .andExpect(content().string(containsString("Tipo: <strong>O+</strong>")))
+                .andExpect(content().string(containsString("Hospital: <strong>Hospital Santa Clara</strong>")))
+                // Remoção individual da urgência mantém o código, tipo e hospital na URL
                 .andExpect(content().string(containsString("codigo=REQ-0060")))
+                .andExpect(content().string(containsString("tipoSanguineo=O_POS")))
                 // Link e botão de remover todos
                 .andExpect(content().string(containsString("Limpar filtros")))
                 .andExpect(content().string(containsString("Remover todos os filtros")));
