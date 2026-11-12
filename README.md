@@ -43,6 +43,9 @@ compatibilidade sanguínea, distribuição e monitoramento de hemocomponentes.
 * *Algoritmos e complexidade:* [docs/algoritmos_u2.md](docs/algoritmos_u2.md)
 * *Código:* [`hemotrack/src/main/java/br/com/hemotrack/algoritmo`](hemotrack/src/main/java/br/com/hemotrack/algoritmo): rota por vizinho mais próximo, FEFO por inserção ordenada, índice de estoque por hash e matriz ABO/Rh 8×8
 * *Integração:* `RequisicaoService.atender(id)` (botão **"Alocar e gerar rota"** na tela do pedido)
+* *Versão C/C++:* [`AED/cpp/rota_vital.cpp`](https://github.com/egs3-coder/AED/blob/main/cpp/rota_vital.cpp)
+* *Tradução comentada C/C++ → Java:* [`AED/java/src/rotavital`](https://github.com/egs3-coder/AED/tree/main/java/src/rotavital) (cada classe com os comentários `// C++:`)
+* *PDF da Unidade 2:* [`Rota_Vital_U2.pdf`](https://github.com/egs3-coder/AED/blob/main/docs/Rota_Vital_U2.pdf)
 ---
 
 ## Issue/Bug Tracker
