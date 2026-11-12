@@ -18,6 +18,9 @@ import br.com.hemotrack.model.TipoSanguineo;
  *    inverte. AB e doador universal de plasma; O so recebe plasma de qualquer um. O Rh nao conta.
  *
  * DIDATICA: nao substitui protocolo clinico/imuno-hematologico.
+ *
+ * Versao C/C++ (regra geral da U2): repositorio AED, cpp/rota_vital.cpp ->
+ *   const int COMPAT_HEMACIAS[8][8], COMPAT_PLASMA[8][8], compativel(), doadoresCompativeis().
  */
 public final class MatrizCompatibilidade {
 

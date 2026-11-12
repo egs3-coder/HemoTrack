@@ -22,6 +22,10 @@ import java.util.List;
  * Estruturas feitas a mao: vetor de nomes (indice de cada ponto), matriz int[][], vetor
  * boolean[] de visitados e um vetor int[] usado como PILHA do caminho. Sem HashMap,
  * sem PriorityQueue.
+ *
+ * Versao C/C++ (regra geral da U2): repositorio AED, cpp/rota_vital.cpp ->
+ *   rotaVizinhoMaisProximo(adj, origem, destino, caminho[], *tamanho). No C++ a malha ja e uma
+ *   matriz fixa ESTRADAS[6][6]; aqui ela e montada a partir dos trechos cadastrados (passos 1 e 2).
  */
 public final class RoteirizadorVizinhoMaisProximo {
 

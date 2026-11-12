@@ -14,6 +14,9 @@ import java.util.List;
  * bolsa de validade mais proxima.
  *
  * Desempate: mesma validade -> menor codigo primeiro (ordem deterministica).
+ *
+ * Versao C/C++ (regra geral da U2): repositorio AED, cpp/rota_vital.cpp ->
+ *   struct NoBolsa, fefoInserir(), fefoRemoverPrimeiro(); no C++ o desempate e pelo id.
  */
 public class ListaFefo {
 

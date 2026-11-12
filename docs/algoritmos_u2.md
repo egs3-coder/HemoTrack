@@ -130,6 +130,29 @@ vizinho mais próximo (teste `becoSemSaida`).
 
 ---
 
+## 🔁 Versão C/C++ e tradução comentada (regra geral)
+
+A versão C/C++ destes mesmos algoritmos, com a tradução comentada para Java, está no repositório
+[**AED**](https://github.com/egs3-coder/AED) (`cpp/rota_vital.cpp` e `java/src/rotavital`, mais o PDF `docs/Rota_Vital_U2.pdf`).
+Os dois lados usam a mesma matriz, a mesma chave de hash (`componente*8 + tipo`, `% 11`), a mesma regra de alocação e a mesma rota.
+
+| Algoritmo | C/C++ (`rota_vital.cpp`) | Java do HemoTrack |
+|---|---|---|
+| Matriz ABO/Rh | `COMPAT_HEMACIAS`, `COMPAT_PLASMA`, `compativel`, `doadoresCompativeis` | `MatrizCompatibilidade` |
+| FEFO | `fefoInserir`, `fefoRemoverPrimeiro` | `ListaFefo` |
+| Hash do estoque | `chaveEstoque`, `funcaoHash`, `hashBuscar`, `hashObterOuCriar` | `TabelaHashEstoque` |
+| Alocação | `alocar` | `RequisicaoService.selecionarBolsas` |
+| Rota | `rotaVizinhoMaisProximo` | `RoteirizadorVizinhoMaisProximo` |
+
+Diferenças que vêm do sistema, não do algoritmo:
+* **Dados:** no C++ o estoque e a malha estão em memória (vetores fixos); no HemoTrack vêm do banco. Por isso o roteirizador
+  do HemoTrack monta a matriz de adjacência a partir dos trechos (passos 1 e 2), enquanto o C++ já recebe `ESTRADAS[6][6]`.
+* **Vencidas:** o C++ remove a bolsa vencida do estoque durante a alocação; o HemoTrack só a pula na lista, porque o descarte
+  oficial (status no banco) é a rotina da US10. Nos dois casos o custo é O(v), porque as vencidas são o começo da lista.
+* **Desempate do FEFO:** mesma validade → menor id (C++) / menor código (HemoTrack).
+
+---
+
 ## ✅ Testes
 
 | Arquivo | O que cobre |

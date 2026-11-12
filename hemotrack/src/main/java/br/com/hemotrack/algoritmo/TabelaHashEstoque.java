@@ -16,6 +16,9 @@ import br.com.hemotrack.model.TipoSanguineo;
  *
  * Exemplo de colisao: Hemacias O- (chave 0*8+0 = 0) e Plaquetas A+ (chave 1*8+3 = 11)
  *                     -> 0 % 11 = 0 e 11 % 11 = 0: as duas ficam na cadeia do slot 0.
+ *
+ * Versao C/C++ (regra geral da U2): repositorio AED, cpp/rota_vital.cpp ->
+ *   struct HashEstoque, chaveEstoque(), funcaoHash(), hashBuscar(), hashObterOuCriar().
  */
 public class TabelaHashEstoque {
 
