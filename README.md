@@ -38,6 +38,13 @@ compatibilidade sanguínea, distribuição e monitoramento de hemocomponentes.
 ---
 
 
+### 🧠 Unidade 2 (AED): algoritmos no HemoTrack
+
+* *Algoritmos e complexidade:* [docs/algoritmos_u2.md](docs/algoritmos_u2.md)
+* *Código:* [`hemotrack/src/main/java/br/com/hemotrack/algoritmo`](hemotrack/src/main/java/br/com/hemotrack/algoritmo): rota por vizinho mais próximo, FEFO por inserção ordenada, índice de estoque por hash e matriz ABO/Rh 8×8
+* *Integração:* `RequisicaoService.atender(id)` (botão **"Alocar e gerar rota"** na tela do pedido)
+---
+
 ## Issue/Bug Tracker
 
 [🐞 Issue/Bug Tracker](https://github.com/egs3-coder/HemoTrack/issues)
