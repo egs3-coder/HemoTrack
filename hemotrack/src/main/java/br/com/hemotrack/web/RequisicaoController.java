@@ -153,20 +153,6 @@ public class RequisicaoController {
         return "redirect:/requisicoes/" + id;
     }
 
-    /** U2: aloca (matriz + hash + FEFO) e gera a rota (vizinho mais proximo) em um passo so. */
-    @PostMapping("/{id}/atender")
-    public String atender(@PathVariable Long id, RedirectAttributes redirect) {
-        Requisicao requisicao = requisicaoService.atender(id);
-        List<String> codigos = new ArrayList<>();
-        for (Bolsa bolsa : requisicaoService.bolsasDa(requisicao)) {
-            codigos.add(bolsa.getCodigo());
-        }
-        redirect.addFlashAttribute("sucesso", "Bolsa(s) " + String.join(", ", codigos)
-                + " reservada(s). Rota gerada: " + requisicao.getItinerario() + " ("
-                + requisicao.getDistanciaFormatada() + " km, " + requisicao.getTempoPrevistoMin() + " min)");
-        return "redirect:/requisicoes/" + id;
-    }
-
     @PostMapping("/{id}/rota")
     public String gerarRota(@PathVariable Long id, RedirectAttributes redirect) {
         Requisicao requisicao = requisicaoService.gerarRota(id);

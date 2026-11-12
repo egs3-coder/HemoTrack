@@ -57,9 +57,8 @@ A conta `marina` dos cenarios da US02 nao vem pronta: crie-a pela tela "Criar co
 | US01RequisicaoEmergencialTest | US01 - Requisição emergencial |
 | US02ContaEAcessoTest, US02TelasTest, US02PersistenciaContaTest | US02 - Conta e acesso (inclui "Esqueci minha senha" e a conta continuar existindo apos reiniciar) |
 | US03EntradaDeBolsasTest | US03 - Entrada de bolsas |
-| US04AlocacaoTest | US04 - Alocação por vencimento (matriz ABO/Rh 8x8 + hash + FEFO) |
-| US05RotaTest | US05 - Rota (vizinho mais próximo) |
-| U2FluxoIntegradoTest, algoritmo/ListaFefoTest, algoritmo/TabelaHashEstoqueTest | U2 - Algoritmos e fluxo integrado (ver `../docs/algoritmos_u2.md`) |
+| US04AlocacaoTest | US04 - Alocação por vencimento |
+| US05RotaTest | US05 - Rota mais rápida |
 | US06TemperaturaTest | US06 - Temperatura em trânsito |
 | US07PainelGerencialTest | US07 - Painel gerencial |
 | US08DemandaPreditivaTest | US08 - Demanda preditiva |

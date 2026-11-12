@@ -36,10 +36,6 @@
         <form th:if="${r.status.name() == 'PENDENTE'}" th:action="@{/requisicoes/{id}/alocar(id=${r.id})}" method="post">
             <button type="submit">Processar alocação</button>
         </form>
-        <!-- U2: fluxo integrado (matriz ABO/Rh + hash + FEFO + vizinho mais proximo) em um clique -->
-        <form th:if="${r.status.name() == 'PENDENTE'}" th:action="@{/requisicoes/{id}/atender(id=${r.id})}" method="post">
-            <button type="submit" class="secundario">Alocar e gerar rota</button>
-        </form>
         <form th:if="${r.status.name() == 'ALOCADA'}" th:action="@{/requisicoes/{id}/rota(id=${r.id})}" method="post">
             <button type="submit" th:classappend="${r.itinerario != null} ? 'secundario'">Gerar rota</button>
         </form>

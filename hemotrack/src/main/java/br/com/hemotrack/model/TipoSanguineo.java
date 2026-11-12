@@ -1,39 +1,48 @@
 package br.com.hemotrack.model;
 
-import br.com.hemotrack.algoritmo.MatrizCompatibilidade;
+import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Tipos ABO/Rh. A ORDEM das constantes e a ordem das linhas e colunas da
- * MatrizCompatibilidade (ordinal 0 = O-, ..., 7 = AB+): nao reordenar.
- */
 public enum TipoSanguineo {
-    O_NEG("O-"),
-    O_POS("O+"),
-    A_NEG("A-"),
-    A_POS("A+"),
-    B_NEG("B-"),
-    B_POS("B+"),
-    AB_NEG("AB-"),
-    AB_POS("AB+");
+    O_NEG("O-", false, false, false),
+    O_POS("O+", false, false, true),
+    A_NEG("A-", true, false, false),
+    A_POS("A+", true, false, true),
+    B_NEG("B-", false, true, false),
+    B_POS("B+", false, true, true),
+    AB_NEG("AB-", true, true, false),
+    AB_POS("AB+", true, true, true);
 
     private final String rotulo;
+    private final boolean antigenoA;
+    private final boolean antigenoB;
+    private final boolean rhPositivo;
 
-    TipoSanguineo(String rotulo) {
+    TipoSanguineo(String rotulo, boolean antigenoA, boolean antigenoB, boolean rhPositivo) {
         this.rotulo = rotulo;
+        this.antigenoA = antigenoA;
+        this.antigenoB = antigenoB;
+        this.rhPositivo = rhPositivo;
     }
 
     public String getRotulo() {
         return rotulo;
     }
 
-    /** Regra de hemacias, consultada na matriz 8x8 [doador][receptor]. O(1). */
+    /** Um paciente so pode receber sangue que nao tenha antigenos (A, B, Rh) que ele nao possui. */
     public boolean podeReceberDe(TipoSanguineo doador) {
-        return MatrizCompatibilidade.compativel(doador, this);
+        return (!doador.antigenoA || this.antigenoA)
+                && (!doador.antigenoB || this.antigenoB)
+                && (!doador.rhPositivo || this.rhPositivo);
     }
 
-    /** Doadores de hemacias aceitos por este receptor (coluna da matriz). */
     public List<TipoSanguineo> doadoresCompativeis() {
-        return List.of(MatrizCompatibilidade.doadoresCompativeis(Hemocomponente.CONCENTRADO_HEMACIAS, this));
+        List<TipoSanguineo> compativeis = new ArrayList<>();
+        for (TipoSanguineo doador : values()) {
+            if (podeReceberDe(doador)) {
+                compativeis.add(doador);
+            }
+        }
+        return compativeis;
     }
 }

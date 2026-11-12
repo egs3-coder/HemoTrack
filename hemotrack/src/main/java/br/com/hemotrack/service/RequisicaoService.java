@@ -1,8 +1,5 @@
 package br.com.hemotrack.service;
 
-import br.com.hemotrack.algoritmo.ListaFefo;
-import br.com.hemotrack.algoritmo.MatrizCompatibilidade;
-import br.com.hemotrack.algoritmo.TabelaHashEstoque;
 import br.com.hemotrack.excecao.RecursoNaoEncontradoException;
 import br.com.hemotrack.excecao.RegraNegocioException;
 import br.com.hemotrack.model.Bolsa;
@@ -18,7 +15,6 @@ import br.com.hemotrack.repository.BolsaRepository;
 import br.com.hemotrack.repository.RequisicaoRepository;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,7 +27,7 @@ import org.springframework.transaction.annotation.Transactional;
  * US04 - Alocacao de bolsas compativeis com prioridade por vencimento.
  *   - So sao consideradas bolsas "Disponivel", do hemocomponente solicitado e compativeis em ABO/Rh.
  *   - Entre as compativeis, e escolhida a de vencimento mais proximo.
- * US05 - Rota de entrega (vizinho mais proximo, U2): a rota calculada fica registrada no pedido.
+ * US05 - Rota de entrega mais rapida: a rota de menor tempo fica registrada no pedido.
  * US11 - Acompanhamento do pedido e confirmacao de recebimento.
  *   - Sequencia: "Pendente de Alocacao" -> "Alocada" -> "Em Transporte" -> "Entregue".
  *   - So e possivel confirmar o recebimento de pedido "Em Transporte".
@@ -148,85 +144,29 @@ public class RequisicaoService {
         if (requisicao.getStatus() != StatusRequisicao.PENDENTE) {
             throw new RegraNegocioException("Só é possível alocar requisições pendentes de alocação");
         }
-        List<Bolsa> escolhidas = selecionarBolsas(requisicao, bolsaRepository.findByStatus(StatusBolsa.DISPONIVEL),
-                LocalDate.now());
+        List<Bolsa> candidatas = bolsaRepository
+                .findByStatusAndHemocomponenteAndTipoSanguineoInAndDataValidadeGreaterThanEqualOrderByDataValidadeAsc(
+                        StatusBolsa.DISPONIVEL, requisicao.getHemocomponente(),
+                        requisicao.getTipoSanguineo().doadoresCompativeis(), LocalDate.now());
+        if (candidatas.isEmpty()) {
+            throw new RegraNegocioException("Não há bolsas compatíveis disponíveis para o tipo "
+                    + requisicao.getTipoSanguineo().getRotulo());
+        }
+        if (candidatas.size() < requisicao.getQuantidade()) {
+            throw new RegraNegocioException("Há apenas " + candidatas.size()
+                    + " bolsa(s) compatível(is) disponível(is) para o tipo "
+                    + requisicao.getTipoSanguineo().getRotulo() + "; o pedido precisa de "
+                    + requisicao.getQuantidade());
+        }
         requisicao.marcarAlocada();
-        for (Bolsa bolsa : escolhidas) {
+        for (Bolsa bolsa : candidatas.subList(0, requisicao.getQuantidade())) {
             bolsa.reservarPara(requisicao);
             bolsaRepository.save(bolsa);
         }
         return requisicaoRepository.save(requisicao);
     }
 
-    /**
-     * Integracao dos algoritmos da U2 na alocacao (n = bolsas disponiveis, q = bolsas pedidas):
-     *  (1) TabelaHashEstoque.construir: cada bolsa vai para a ListaFefo da chave (componente, tipo)
-     *      por INSERCAO ORDENADA -> a ordem de validade sai daqui, e nao de ORDER BY.
-     *  (2) MatrizCompatibilidade: a coluna do receptor da os doadores aceitos (8 consultas O(1)).
-     *  (3) Para cada doador aceito, uma busca O(1) no hash devolve a lista FEFO daquele tipo;
-     *      as vencidas (prefixo da lista) sao puladas.
-     *  (4) q vezes: compara so as CABECAS das ate 8 listas e retira a que vence primeiro
-     *      (intercalacao de listas ordenadas) -> FEFO entre todos os tipos compativeis.
-     * Nada e reservado se nao houver bolsas suficientes.
-     */
-    List<Bolsa> selecionarBolsas(Requisicao requisicao, List<Bolsa> disponiveis, LocalDate hoje) {
-        TabelaHashEstoque indice = TabelaHashEstoque.construir(disponiveis);
-
-        TipoSanguineo[] doadores = MatrizCompatibilidade.doadoresCompativeis(
-                requisicao.getHemocomponente(), requisicao.getTipoSanguineo());
-        ListaFefo[] listas = new ListaFefo[doadores.length];
-        int nListas = 0;
-        int totalCompativeis = 0;
-        for (TipoSanguineo doador : doadores) {
-            ListaFefo lista = indice.buscar(requisicao.getHemocomponente(), doador);
-            if (lista == null) {
-                continue;
-            }
-            lista.removerVencidas(hoje);
-            if (!lista.estaVazia()) {
-                listas[nListas++] = lista;
-                totalCompativeis += lista.tamanho();
-            }
-        }
-
-        if (totalCompativeis == 0) {
-            throw new RegraNegocioException("Não há bolsas compatíveis disponíveis para o tipo "
-                    + requisicao.getTipoSanguineo().getRotulo());
-        }
-        if (totalCompativeis < requisicao.getQuantidade()) {
-            throw new RegraNegocioException("Há apenas " + totalCompativeis
-                    + " bolsa(s) compatível(is) disponível(is) para o tipo "
-                    + requisicao.getTipoSanguineo().getRotulo() + "; o pedido precisa de "
-                    + requisicao.getQuantidade());
-        }
-
-        List<Bolsa> escolhidas = new ArrayList<>(requisicao.getQuantidade());
-        while (escolhidas.size() < requisicao.getQuantidade()) {
-            ListaFefo melhor = null;
-            for (int i = 0; i < nListas; i++) {
-                if (listas[i].estaVazia()) {
-                    continue;
-                }
-                if (melhor == null || ListaFefo.venceAntes(listas[i].primeira(), melhor.primeira())) {
-                    melhor = listas[i];
-                }
-            }
-            escolhidas.add(melhor.removerPrimeira());
-        }
-        return escolhidas;
-    }
-
-    /**
-     * Fluxo integrado da U2: dado um pedido, aloca as bolsas compativeis (matriz + hash + FEFO)
-     * e ja calcula a rota de entrega (vizinho mais proximo).
-     */
-    @Transactional
-    public Requisicao atender(Long id) {
-        alocar(id);
-        return gerarRota(id);
-    }
-
-    /** US05 cenarios 1 e 2: calcula a rota pelo vizinho mais proximo e registra no pedido. */
+    /** US05 cenarios 1 e 2: calcula a rota de menor tempo e registra no pedido. */
     @Transactional
     public Requisicao gerarRota(Long id) {
         Requisicao requisicao = buscar(id);

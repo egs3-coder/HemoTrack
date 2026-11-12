@@ -1,18 +1,21 @@
 # 🧠 Unidade 2 — Algoritmos no HemoTrack
 
+> 📁 O projeto da Unidade 2 fica na pasta [`aed-u2/`](../aed-u2) (Spring Boot completo, com os algoritmos integrados).
+> A pasta `hemotrack/` é a **Entrega 04 de POO**, mantida exatamente como foi entregue em 09/11.
+
 Este documento mostra **onde** estão os quatro algoritmos pedidos na U2, **como** eles se ligam no
 fluxo de um pedido e **qual a complexidade de cada um, justificada pelo nosso próprio código**.
 
 Todos os algoritmos foram escritos por nós, no pacote
-[`br.com.hemotrack.algoritmo`](../hemotrack/src/main/java/br/com/hemotrack/algoritmo). Eles **não usam**
+[`br.com.hemotrack.algoritmo`](../aed-u2/src/main/java/br/com/hemotrack/algoritmo). Eles **não usam**
 `HashMap`, `PriorityQueue`, `LinkedList`, `Collections.sort` nem `ORDER BY` do banco.
 
 | # | Algoritmo pedido | Classe | O que substituiu |
 |---|---|---|---|
-| 1 | Rota por **vizinho mais próximo** | [`RoteirizadorVizinhoMaisProximo`](../hemotrack/src/main/java/br/com/hemotrack/algoritmo/RoteirizadorVizinhoMaisProximo.java) | Dijkstra com `PriorityQueue` + `HashMap` no `RotaService` |
-| 2 | **FEFO** por inserção ordenada | [`ListaFefo`](../hemotrack/src/main/java/br/com/hemotrack/algoritmo/ListaFefo.java) | `...OrderByDataValidadeAsc` (ORDER BY do banco) |
-| 3 | **Índice de estoque por hash** | [`TabelaHashEstoque`](../hemotrack/src/main/java/br/com/hemotrack/algoritmo/TabelaHashEstoque.java) | filtro `TipoSanguineoIn` feito pelo banco |
-| 4 | Compatibilidade ABO/Rh por **matriz 8×8** | [`MatrizCompatibilidade`](../hemotrack/src/main/java/br/com/hemotrack/algoritmo/MatrizCompatibilidade.java) | regra de antígenos em `TipoSanguineo.podeReceberDe` |
+| 1 | Rota por **vizinho mais próximo** | [`RoteirizadorVizinhoMaisProximo`](../aed-u2/src/main/java/br/com/hemotrack/algoritmo/RoteirizadorVizinhoMaisProximo.java) | Dijkstra com `PriorityQueue` + `HashMap` no `RotaService` |
+| 2 | **FEFO** por inserção ordenada | [`ListaFefo`](../aed-u2/src/main/java/br/com/hemotrack/algoritmo/ListaFefo.java) | `...OrderByDataValidadeAsc` (ORDER BY do banco) |
+| 3 | **Índice de estoque por hash** | [`TabelaHashEstoque`](../aed-u2/src/main/java/br/com/hemotrack/algoritmo/TabelaHashEstoque.java) | filtro `TipoSanguineoIn` feito pelo banco |
+| 4 | Compatibilidade ABO/Rh por **matriz 8×8** | [`MatrizCompatibilidade`](../aed-u2/src/main/java/br/com/hemotrack/algoritmo/MatrizCompatibilidade.java) | regra de antígenos em `TipoSanguineo.podeReceberDe` |
 
 ---
 
@@ -157,14 +160,14 @@ Diferenças que vêm do sistema, não do algoritmo:
 
 | Arquivo | O que cobre |
 |---|---|
-| [`US04AlocacaoTest`](../hemotrack/src/test/java/br/com/hemotrack/US04AlocacaoTest.java) | Cenários da US04 com a nova alocação. **Matriz 8×8**: 11 pares compatíveis e 10 incompatíveis de hemácias, 5 + 5 de plasma, conferência das 64 combinações e as colunas da matriz. **Integração**: nunca reserva bolsa incompatível, FEFO entre tipos diferentes sem depender da ordem do banco, pula vencidas, plasma com regra invertida, estoque insuficiente não reserva nada. |
-| [`US05RotaTest`](../hemotrack/src/test/java/br/com/hemotrack/US05RotaTest.java) | Cenários da US05 com o vizinho mais próximo, mais o beco sem saída e o caso em que a escolha gulosa não acha o menor tempo. |
-| [`U2FluxoIntegradoTest`](../hemotrack/src/test/java/br/com/hemotrack/U2FluxoIntegradoTest.java) | `atender(id)`: pedido → matriz → hash → FEFO → rota, e o caso sem bolsa compatível. |
-| [`ListaFefoTest`](../hemotrack/src/test/java/br/com/hemotrack/algoritmo/ListaFefoTest.java) | Inserção no início, no meio e no fim, desempate pelo código, retirada e vencidas no início da lista. |
-| [`TabelaHashEstoqueTest`](../hemotrack/src/test/java/br/com/hemotrack/algoritmo/TabelaHashEstoqueTest.java) | Chave e função hash, busca de chave existente e inexistente, colisão no slot 0 e as 32 combinações. |
+| [`US04AlocacaoTest`](../aed-u2/src/test/java/br/com/hemotrack/US04AlocacaoTest.java) | Cenários da US04 com a nova alocação. **Matriz 8×8**: 11 pares compatíveis e 10 incompatíveis de hemácias, 5 + 5 de plasma, conferência das 64 combinações e as colunas da matriz. **Integração**: nunca reserva bolsa incompatível, FEFO entre tipos diferentes sem depender da ordem do banco, pula vencidas, plasma com regra invertida, estoque insuficiente não reserva nada. |
+| [`US05RotaTest`](../aed-u2/src/test/java/br/com/hemotrack/US05RotaTest.java) | Cenários da US05 com o vizinho mais próximo, mais o beco sem saída e o caso em que a escolha gulosa não acha o menor tempo. |
+| [`U2FluxoIntegradoTest`](../aed-u2/src/test/java/br/com/hemotrack/U2FluxoIntegradoTest.java) | `atender(id)`: pedido → matriz → hash → FEFO → rota, e o caso sem bolsa compatível. |
+| [`ListaFefoTest`](../aed-u2/src/test/java/br/com/hemotrack/algoritmo/ListaFefoTest.java) | Inserção no início, no meio e no fim, desempate pelo código, retirada e vencidas no início da lista. |
+| [`TabelaHashEstoqueTest`](../aed-u2/src/test/java/br/com/hemotrack/algoritmo/TabelaHashEstoqueTest.java) | Chave e função hash, busca de chave existente e inexistente, colisão no slot 0 e as 32 combinações. |
 
 ```bash
-cd hemotrack
+cd aed-u2
 mvn test
 ```
 

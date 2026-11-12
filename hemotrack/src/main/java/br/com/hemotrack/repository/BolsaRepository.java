@@ -27,12 +27,10 @@ public interface BolsaRepository extends JpaRepository<Bolsa, Long> {
     
     long countByStatusAndDataValidadeBetween(StatusBolsa status, LocalDate inicio, LocalDate fim);
 
-    /**
-     * US04: bolsas com o status pedido, SEM ordenacao do banco. A compatibilidade (matriz 8x8),
-     * o indice (tabela hash) e a ordem FEFO (insercao ordenada) sao feitos no Java, pelo pacote
-     * br.com.hemotrack.algoritmo.
-     */
-    List<Bolsa> findByStatus(StatusBolsa status);
+    /** US04: bolsas compativeis e nao vencidas, da validade mais proxima para a mais distante (FEFO). */
+    
+    List<Bolsa> findByStatusAndHemocomponenteAndTipoSanguineoInAndDataValidadeGreaterThanEqualOrderByDataValidadeAsc(
+            StatusBolsa status, Hemocomponente hemocomponente, Collection<TipoSanguineo> tipos, LocalDate hoje);
 
     /** US10: bolsas ainda no estoque cuja validade ja passou. */
     

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: cabeca('Hospitais')}"></head>
+<body>
+<header th:replace="~{fragments :: topo}"></header>
+<main class="conteudo">
+    <h1>Hospitais conveniados</h1>
+
+    <h2>Novo hospital</h2>
+    <form class="formulario" th:action="@{/hospitais}" method="post">
+        <label>Nome
+            <input type="text" name="nome" placeholder="Hospital Santa Clara">
+        </label>
+        <label>CNPJ
+            <input type="text" name="cnpj" placeholder="12.345.678/0001-90">
+        </label>
+        <label>Região
+            <input type="text" name="regiao" placeholder="Norte">
+        </label>
+        <button type="submit">Cadastrar hospital</button>
+    </form>
+
+    <h2>Cadastrados</h2>
+    <div class="rolagem">
+        <table>
+            <thead>
+            <tr><th>Nome</th><th>CNPJ</th><th>Região</th><th>Situação</th><th></th></tr>
+            </thead>
+            <tbody>
+            <tr th:each="h : ${hospitais}">
+                <td th:text="${h.nome}"></td>
+                <td th:text="${h.cnpjFormatado}"></td>
+                <td th:text="${h.regiao}"></td>
+                <td><span class="etiqueta" th:classappend="${h.ativo} ? 'st-ok' : 'st-off'" th:text="${h.situacao}"></span></td>
+                <td>
+                    <form th:action="@{/hospitais/{id}/situacao(id=${h.id})}" method="post">
+                        <button type="submit" class="secundario pequeno" th:text="${h.ativo} ? 'Inativar' : 'Ativar'"></button>
+                    </form>
+                </td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(hospitais)}"><td colspan="5">Nenhum hospital cadastrado.</td></tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+</body>
+</html>

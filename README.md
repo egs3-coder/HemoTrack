@@ -40,9 +40,11 @@ compatibilidade sanguínea, distribuição e monitoramento de hemocomponentes.
 
 ### 🧠 Unidade 2 (AED): algoritmos no HemoTrack
 
+* *Projeto da Unidade 2 (Spring Boot):* [Acessar a pasta `aed-u2`](https://github.com/egs3-coder/HemoTrack/tree/main/aed-u2) (cópia do sistema com os algoritmos integrados; a Entrega 04 de POO continua intacta em `hemotrack/`)
 * *Algoritmos e complexidade:* [docs/algoritmos_u2.md](docs/algoritmos_u2.md)
-* *Código:* [`hemotrack/src/main/java/br/com/hemotrack/algoritmo`](hemotrack/src/main/java/br/com/hemotrack/algoritmo): rota por vizinho mais próximo, FEFO por inserção ordenada, índice de estoque por hash e matriz ABO/Rh 8×8
+* *Código dos algoritmos:* [`aed-u2/src/main/java/br/com/hemotrack/algoritmo`](https://github.com/egs3-coder/HemoTrack/tree/main/aed-u2/src/main/java/br/com/hemotrack/algoritmo): rota por vizinho mais próximo, FEFO por inserção ordenada, índice de estoque por hash e matriz ABO/Rh 8×8
 * *Integração:* `RequisicaoService.atender(id)` (botão **"Alocar e gerar rota"** na tela do pedido)
+* *Como testar:* `cd aed-u2` e depois `mvn test`
 * *Versão C/C++:* [`AED/cpp/rota_vital.cpp`](https://github.com/egs3-coder/AED/blob/main/cpp/rota_vital.cpp)
 * *Tradução comentada C/C++ → Java:* [`AED/java/src/rotavital`](https://github.com/egs3-coder/AED/tree/main/java/src/rotavital) (cada classe com os comentários `// C++:`)
 * *PDF da Unidade 2:* [`Rota_Vital_U2.pdf`](https://github.com/egs3-coder/AED/blob/main/docs/Rota_Vital_U2.pdf)

@@ -123,42 +123,11 @@ class US05RotaTest {
     }
 
     @Test
-    @DisplayName("Regra: rota pelo vizinho mais próximo (algoritmo isolado)")
+    @DisplayName("Regra: a rota escolhida é a de menor tempo total (algoritmo isolado)")
     void menorTempoTotal() {
-        // Do hemocentro, Boa Vista (10 min) e mais proxima que Santa Clara (25 min); de Boa Vista, Santa Clara (8 min)
         Rota rota = new RotaService(null).calcular(malha, "Hemocentro Central", "Hospital Santa Clara");
 
-        assertEquals(List.of("Hemocentro Central", "Hospital Boa Vista", "Hospital Santa Clara"), rota.getPontos());
         assertEquals(18, rota.getTempoMin());
         assertEquals(9.0, rota.getDistanciaKm(), 0.001);
-    }
-
-    @Test
-    @DisplayName("U2: beco sem saída -> o vizinho mais próximo volta e tenta o próximo vizinho")
-    void becoSemSaida() {
-        List<Trecho> comBeco = List.of(
-                new Trecho("Hemocentro Central", "Posto Beco", 2, 1),
-                new Trecho("Hemocentro Central", "Hospital Boa Vista", 6, 3),
-                new Trecho("Hospital Boa Vista", "Hospital Santa Clara", 4, 2));
-
-        Rota rota = new RotaService(null).calcular(comBeco, "Hemocentro Central", "Hospital Santa Clara");
-
-        assertEquals("Hemocentro Central → Hospital Boa Vista → Hospital Santa Clara", rota.getItinerario());
-        assertEquals(10, rota.getTempoMin());
-    }
-
-    @Test
-    @DisplayName("U2: o vizinho mais próximo é guloso e pode não achar o menor tempo")
-    void vizinhoMaisProximoEGuloso() {
-        // Direto: 20 min. Mas o primeiro passo mais curto e ir ao Posto X (5 min), que fica a 30 min do hospital.
-        List<Trecho> armadilha = List.of(
-                new Trecho("Hemocentro Central", "Posto X", 5, 2),
-                new Trecho("Posto X", "Hospital Santa Clara", 30, 15),
-                new Trecho("Hemocentro Central", "Hospital Santa Clara", 20, 10));
-
-        Rota rota = new RotaService(null).calcular(armadilha, "Hemocentro Central", "Hospital Santa Clara");
-
-        assertEquals("Hemocentro Central → Posto X → Hospital Santa Clara", rota.getItinerario());
-        assertEquals(35, rota.getTempoMin());
     }
 }
